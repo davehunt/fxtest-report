@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <style>
+      * {
+        font-family:"Helvetica Neue", Helvetica, Sans-serif;
+      }
+
+      h1 {
+        font-size:40px;
+        font-weight:bold;
+        color:#191919;
+      }
+
+      h2 {
+        font-weight:normal;
+        font-size:20px;
+        padding:5px 0;
+      }
+
+      table {
+        margin: 5px 0;
+        width: 800px;
+        display: none;
+        visibility: hidden;
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      table td {
+        border: 1px solid black;
+        padding: 2px;
+      }
+
+      table tr {
+        background-color: #ddd;
+      }
+
+      .wrapper {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 10px;
+      }
+
+      .toggle {
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .toggle + label {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .toggle + label:before {
+        content:"\25B6\A0"
+      }
+
+      .toggle:checked ~ table {
+        display: table;
+        visibility: visible;
+      }
+
+      .toggle:checked + label:before {
+        content:"\25BC\A0"
+      }
+    </style>
+    <meta charset="UTF-8">
+    <title>Firefox Test Engineering Test Results</title>
+  </head>
+  <body>
+    <h1>Firefox Test Engineering Test Results</h1>
+    <p>Generated on <strong>{{ generated.date }}</strong> at
+      <strong>{{ generated.time }}</strong>.</p>
+    <p>A total of <strong>{{ total }}</strong> tests ran between
+      <strong>{{ start }}</strong> and <strong>{{ end }}</strong>.</p>
+
+    <h2>Tests with lowest pass rate</h2>
+    <p>Percentage of tests that had the expected outcome.</p>
+    {% for j in lowest_pass_rate %}
+    <div>
+      <input id="lpr_{{ j.job }}" type="checkbox" class="toggle" />
+      <label for="lpr_{{ j.job }}">{{ j.job }}</label>
+      <table>
+        {% for t in j.tests %}
+        <tr style="background-color: {{ t.pass.color }}">
+          <td title="{{ t.test_id }}">{{ t.test_name }}</td>
+          <td>{{ t.pass.percent }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+
+    <h2>Tests with most failures</h2>
+    <p>Tests with the highest total number of failures.</p>
+    {% for j in most_failing %}
+    <div>
+      <input id="mf_{{ j.job }}" type="checkbox" class="toggle" />
+      <label for="mf_{{ j.job }}">{{ j.job }}</label>
+      <table>
+        {% for t in j.tests %}
+        <tr>
+          <td title="{{ t.test_id }}">{{ t.test_name }}</td>
+          <td>{{ t.failures }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+
+    <h2>Slowest tests</h2>
+    <p>Slowest average test durations.</p>
+    {% for j in slowest %}
+    <div>
+      <input id="s_{{ j.job }}" type="checkbox" class="toggle" />
+      <label for="s_{{ j.job }}">{{ j.job }}</label>
+      <table>
+        {% for t in j.tests %}
+        <tr>
+          <td title="{{ t.test_id }}">{{ t.test_name }}</td>
+          <td>{{ t.duration }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+
+    <h2>Longest running tests</h2>
+    <p>Most machine time consumed by tests over multiple executions.</p>
+    {% for j in longest %}
+    <div>
+      <input id="lr_{{ j.job }}" type="checkbox" class="toggle" />
+      <label for="lr_{{ j.job }}">{{ j.job }}</label>
+      <table>
+        {% for t in j.tests %}
+        <tr>
+          <td title="{{ t.test_id }}">{{ t.test_name }}</td>
+          <td>{{ t.duration }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+
+  </body>
+</html>
