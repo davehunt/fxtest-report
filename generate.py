@@ -1,16 +1,43 @@
 from datetime import datetime
+import os
 import sys
 
 from colour import Color
 from humanize import naturaldelta
 from jinja2 import Environment, FileSystemLoader
+
+import matplotlib
+matplotlib.use('Agg')  # force matplotlib to not use any xwindows backend
+
+import matplotlib.pyplot as plt
+import matplotlib.pylab as pylab
 import pandas as pd
 import requests
+import seaborn as sns
+
+params = {
+    'legend.fontsize': 'x-small',
+    'axes.labelsize': 'x-small',
+    'axes.titlesize': 'x-small',
+    'xtick.labelsize': 'x-small',
+    'ytick.labelsize': 'x-small',
+    'legend.edgecolor': 'grey',
+    'legend.fancybox': True,
+    'legend.facecolor': 'white'}
+pylab.rcParams.update(params)
+sns.set_style('darkgrid')
 
 
-def get_data():
+
+
+def get_data(query):
     url = 'http://activedata.allizom.org/query'
-    query = """{
+    r = requests.post(url, data=query).json()
+    return pd.DataFrame(r['data'], columns=r['header'])
+
+
+def get_durations():
+    return get_data("""{
     "from":"fx-test",
     "groupby":[
         {"name":"job","value":"run.job_name"},
@@ -54,9 +81,34 @@ def get_data():
         {"gt":{"run.stats.start_time":{"date":"today-4week"}}}
     ]},
     "limit":1000
-}"""
-    r = requests.post(url, data=query).json()
-    return pd.DataFrame(r['data'], columns=r['header'])
+}""")
+
+
+def get_outcomes():
+    return get_data("""{
+    "from":"fx-test",
+    "edges":[
+        {"name":"job","value":"run.job_name","allowNulls":false},
+        {
+            "name":"date",
+            "value":"result.end_time",
+            "allowNulls":false,
+            "domain":{
+                "type":"time",
+                "min":"today-12week",
+                "max":"today-1day",
+                "interval":"day"
+            }
+        },
+        {"name":"result","value":"result.result","allowNulls":false},
+        {"name":"ok","value":"result.ok"}
+    ],
+    "where":{"and":[
+        {"eq":{"run.jenkins_url":"https://fx-test-jenkins.stage.mozaws.net/"}}
+    ]},
+    "limit":1000,
+    "format":"table"
+}""")
 
 
 def get_lowest_pass_rate(df):
@@ -140,25 +192,56 @@ def get_longest_tests(df, job, limit=10):
 
 
 if __name__ == "__main__":
-    df = get_data()
+    ddf = get_durations()
     generated = datetime.now()
-    start = datetime.fromtimestamp(df['start'].min())
-    end = datetime.fromtimestamp(df['end'].max())
-    df['failures'] = df['failures'].astype(int)
-    df['pass'] = 1 - df['failures']/df['count']  # calculate pass rate
+    start = datetime.fromtimestamp(ddf['start'].min())
+    end = datetime.fromtimestamp(ddf['end'].max())
+    ddf['failures'] = ddf['failures'].astype(int)
+    ddf['pass'] = 1 - ddf['failures']/ddf['count']  # calculate pass rate
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.html')
     template_vars = {
-        'total': '{:,}'.format(df['count'].sum()),
+        'total': '{:,}'.format(ddf['count'].sum()),
         'start':  start.strftime('%d-%b-%Y'),
         'end': end.strftime('%d-%b-%Y'),
         'generated': {
             'date': generated.strftime('%d-%b-%Y'),
             'time': generated.strftime('%H:%M:%S')},
-        'lowest_pass_rate': get_lowest_pass_rate(df),
-        'most_failing': get_most_failing(df),
-        'slowest': get_slowest(df),
-        'longest': get_longest(df)}
+        'lowest_pass_rate': get_lowest_pass_rate(ddf),
+        'most_failing': get_most_failing(ddf),
+        'slowest': get_slowest(ddf),
+        'longest': get_longest(ddf)}
+
+    o = {'T': 'expected', 'F': 'unexpected'}
+    odf = get_outcomes()
+    odf['date'] = pd.to_datetime(odf['date'], unit='s')
+    jodf = odf.groupby(by=['job', 'date', 'ok', 'result'])['count'] \
+        .sum().unstack(level=2).unstack()
+
+    jobs = jodf.index.levels[0]
+    fig, axes = plt.subplots(len(jobs) + 1, 2, sharex=True, figsize=(10, 40))
+    plt.subplots_adjust(hspace=0.3, wspace=0.2)
+
+    todf = odf.groupby(by=['date', 'ok', 'result'])['count'] \
+        .sum().unstack(level=1).unstack()
+
+    for ok, ax in zip(o.keys(), axes[0]):
+        a = todf[ok].plot(ax=ax, title='all jobs ({} outcomes)'.format(o[ok]))
+        a.legend(loc='upper left', frameon=True).set_title('')
+
+    for job, ax in zip(jobs, axes[1:]):
+        for ok, ax in zip(o.keys(), ax):
+            t = '{} ({} outcomes)'.format(job, o[ok])
+            a = jodf.loc[job][ok].plot(ax=ax, title=t)
+            a.legend(loc='upper left', frameon=True).set_title('')
+            a.set_ylim(ymin=0)
+            a.set_xlabel('')
+
+    path = sys.argv[1]
+    fig.savefig(
+        os.path.join(os.path.dirname(path), 'overview.png'),
+        bbox_inches='tight', pad_inches=0)
+
     html = template.render(template_vars)
-    with open(sys.argv[1], 'w') as f:
+    with open(path, 'w') as f:
         f.writelines(html)
