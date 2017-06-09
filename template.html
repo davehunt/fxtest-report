@@ -64,6 +64,13 @@
       .toggle:checked + label:before {
         content:"\25BC\A0"
       }
+
+      .total {
+        border-radius: 8px;
+        background: #ddd;
+        padding: 0 0.5em;
+        font-size: 85%;
+      }
     </style>
     <meta charset="UTF-8">
     <title>Firefox Test Engineering Test Results</title>
@@ -89,7 +96,12 @@
     {% for j in lowest_pass_rate %}
     <div>
       <input id="lpr_{{ j.job }}" type="checkbox" class="toggle" />
-      <label for="lpr_{{ j.job }}">{{ j.job }}</label>
+      <label for="lpr_{{ j.job }}">
+        {{ j.job }}
+        <span class="total" style="background-color: {{ j.pass.color }}">
+          {{ j.pass.percent }}
+        </span>
+      </label>
       <table>
         {% for t in j.tests %}
         <tr style="background-color: {{ t.pass.color }}">
@@ -106,7 +118,9 @@
     {% for j in most_failing %}
     <div>
       <input id="mf_{{ j.job }}" type="checkbox" class="toggle" />
-      <label for="mf_{{ j.job }}">{{ j.job }}</label>
+      <label for="mf_{{ j.job }}">
+        {{ j.job }} <span class="total">{{ j.failures }}</span>
+      </label>
       <table>
         {% for t in j.tests %}
         <tr>
@@ -123,7 +137,9 @@
     {% for j in slowest %}
     <div>
       <input id="s_{{ j.job }}" type="checkbox" class="toggle" />
-      <label for="s_{{ j.job }}">{{ j.job }}</label>
+      <label for="s_{{ j.job }}">
+        {{ j.job }} <span class="total">{{ j.duration }}</span>
+      </label>
       <table>
         {% for t in j.tests %}
         <tr>
@@ -140,7 +156,9 @@
     {% for j in longest %}
     <div>
       <input id="lr_{{ j.job }}" type="checkbox" class="toggle" />
-      <label for="lr_{{ j.job }}">{{ j.job }}</label>
+      <label for="lr_{{ j.job }}">
+        {{ j.job }} <span class="total">{{ j.duration }}</span>
+      </label>
       <table>
         {% for t in j.tests %}
         <tr>

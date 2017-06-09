@@ -112,16 +112,23 @@ def get_outcomes():
 
 
 def get_lowest_pass_rate(df):
-    jobs = get_lowest_pass_rate_jobs(df)
-    return [{'job': job, 'tests': get_lowest_pass_rate_tests(df, job)}
-            for job in jobs]
+    return get_lowest_pass_rate_jobs(df)
 
 
 def get_lowest_pass_rate_jobs(df, limit=10):
-    df = df.groupby(by='job', sort=False).sum()
-    df['pass'] = 1 - df['failures']/df['count']  # recalculate pass rate
-    return df.sort_values('pass', ascending=True) \
-        .reset_index()[:limit]['job'].values
+    colors = list(Color('red').range_to(Color('lime'), 101))
+    jdf = df.groupby(by='job', sort=False).sum()
+    jdf['pass'] = 1 - jdf['failures']/jdf['count']  # recalculate pass rate
+    jobs = jdf.sort_values('pass', ascending=True) \
+        .reset_index()[:limit] \
+        .to_dict(orient='records')
+    for j in jobs:
+        pc = j['pass'] * 100
+        j['pass'] = {
+            'percent': '{0:.0f}%'.format(pc),
+            'color': colors[int(pc)].hex}
+        j['tests'] = get_lowest_pass_rate_tests(df, j['job'])
+    return jobs
 
 
 def get_lowest_pass_rate_tests(df, job, limit=10):
@@ -138,15 +145,18 @@ def get_lowest_pass_rate_tests(df, job, limit=10):
 
 
 def get_most_failing(df):
-    jobs = get_most_failing_jobs(df)
-    return [{'job': job, 'tests': get_most_failing_tests(df, job)}
-            for job in jobs]
+    return [{
+        'job': j['job'],
+        'failures': j['failures'],
+        'tests': get_most_failing_tests(df, j['job'])}
+            for j in get_most_failing_jobs(df)]
 
 
 def get_most_failing_jobs(df, limit=10):
     return df.groupby(by='job', sort=False).sum() \
         .sort_values('failures', ascending=False) \
-        .reset_index()[:limit]['job'].values
+        .reset_index()[:limit] \
+        .to_dict(orient='records')
 
 
 def get_most_failing_tests(df, job, limit=10):
@@ -156,14 +166,19 @@ def get_most_failing_tests(df, job, limit=10):
 
 
 def get_slowest(df):
-    jobs = get_slowest_jobs(df)
-    return [{'job': job, 'tests': get_slowest_tests(df, job)} for job in jobs]
+    return [{
+        'job': j['job'],
+        'duration': j['duration'],
+        'tests': get_slowest_tests(df, j['job'])}
+            for j in get_slowest_jobs(df)]
 
 
 def get_slowest_jobs(df, limit=10):
-    return df.groupby(by='job', sort=False).sum() \
+    df = df.groupby(by='job', sort=False).sum() \
         .sort_values('d90', ascending=False) \
-        .reset_index()[:limit]['job'].values
+        .reset_index()[:limit]
+    df['duration'] = df['d90'].apply(lambda x: naturaldelta(x))
+    return df.to_dict(orient='records')
 
 
 def get_slowest_tests(df, job, limit=10):
@@ -174,14 +189,19 @@ def get_slowest_tests(df, job, limit=10):
 
 
 def get_longest(df):
-    jobs = get_longest_jobs(df)
-    return [{'job': job, 'tests': get_longest_tests(df, job)} for job in jobs]
+    return [{
+        'job': j['job'],
+        'duration': j['duration'],
+        'tests': get_longest_tests(df, j['job'])}
+            for j in get_longest_jobs(df)]
 
 
 def get_longest_jobs(df, limit=10):
-    return df.groupby(by='job', sort=False).sum() \
+    df = df.groupby(by='job', sort=False).sum() \
         .sort_values('dtotal', ascending=False) \
-        .reset_index()[:limit]['job'].values
+        .reset_index()[:limit]
+    df['duration'] = df['dtotal'].apply(lambda x: naturaldelta(x))
+    return df.to_dict(orient='records')
 
 
 def get_longest_tests(df, job, limit=10):
