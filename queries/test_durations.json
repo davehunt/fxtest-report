@@ -64,7 +64,7 @@
       {
         "gt": {
           "run.stats.start_time": {
-            "date": "today-4week"
+            "date": "today-8week"
           }
         }
       }

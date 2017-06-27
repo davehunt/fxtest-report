@@ -12,7 +12,7 @@
       "allowNulls": false,
       "domain": {
         "type": "time",
-        "min": "today-12week",
+        "min": "today-8week",
         "max": "today-1day",
         "interval": "day"
       }
