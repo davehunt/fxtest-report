@@ -81,7 +81,7 @@ if __name__ == "__main__":
             a.set_xlabel('')
 
     tddf = ad.get_total_durations()
-    tddf.plot(ax=axes[0][2], title='all jobs (durations)')
+    a = tddf.plot(ax=axes[0][2], title='all jobs (durations)')
     a.legend(loc='upper left', frameon=True).set_title('')
     a.set_xlabel('')
 
