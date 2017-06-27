@@ -28,87 +28,24 @@ pylab.rcParams.update(params)
 sns.set_style('darkgrid')
 
 
-
-
 def get_data(query):
     url = 'http://activedata.allizom.org/query'
-    r = requests.post(url, data=query).json()
-    return pd.DataFrame(r['data'], columns=r['header'])
+    with open(os.path.join('queries', query), 'r') as f:
+        r = requests.post(url, data=f.read()).json()
+        return pd.DataFrame(r['data'], columns=r['header'])
 
 
 def get_durations():
-    return get_data("""{
-    "from":"fx-test",
-    "groupby":[
-        {"name":"job","value":"run.job_name"},
-        {"name":"test_id","value":"test.full_name"},
-        {"name":"test_name","value":"test.name"}
-    ],
-    "select":[
-        {
-            "name":"d90",
-            "aggregate":"percentile",
-            "percentile":0.9,
-            "value":"result.duration"
-        },
-        {
-            "name":"dtotal",
-            "aggregate":"sum",
-            "value":"result.duration"
-        },
-        {
-            "name":"count",
-            "aggregate":"count"
-        },
-        {
-            "name":"failures",
-            "aggregate":"sum",
-            "value":{"when":{"eq":{"result.ok":"F"}}, "then":1, "else":0}
-        },
-        {
-            "name":"start",
-            "aggregate":"min",
-            "value":"run.stats.start_time"
-        },
-        {
-            "name":"end",
-            "aggregate":"max",
-            "value":"run.stats.end_time"
-        }
-    ],
-    "where":{"and":[
-        {"eq":{"run.jenkins_url":"https://fx-test-jenkins.stage.mozaws.net/"}},
-        {"gt":{"run.stats.start_time":{"date":"today-4week"}}}
-    ]},
-    "limit":1000
-}""")
+    df = get_data('durations.json')
+    df['failures'] = df['failures'].astype(int)
+    df['pass'] = 1 - df['failures']/df['count']  # calculate pass rate
+    return df
 
 
 def get_outcomes():
-    return get_data("""{
-    "from":"fx-test",
-    "edges":[
-        {"name":"job","value":"run.job_name","allowNulls":false},
-        {
-            "name":"date",
-            "value":"result.end_time",
-            "allowNulls":false,
-            "domain":{
-                "type":"time",
-                "min":"today-12week",
-                "max":"today-1day",
-                "interval":"day"
-            }
-        },
-        {"name":"result","value":"result.result","allowNulls":false},
-        {"name":"ok","value":"result.ok"}
-    ],
-    "where":{"and":[
-        {"eq":{"run.jenkins_url":"https://fx-test-jenkins.stage.mozaws.net/"}}
-    ]},
-    "limit":1000,
-    "format":"table"
-}""")
+    df = get_data('outcomes.json')
+    df['date'] = pd.to_datetime(df['date'], unit='s')
+    return df
 
 
 def get_lowest_pass_rate(df):
@@ -216,8 +153,6 @@ if __name__ == "__main__":
     generated = datetime.now()
     start = datetime.fromtimestamp(ddf['start'].min())
     end = datetime.fromtimestamp(ddf['end'].max())
-    ddf['failures'] = ddf['failures'].astype(int)
-    ddf['pass'] = 1 - ddf['failures']/ddf['count']  # calculate pass rate
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.html')
     template_vars = {
@@ -234,7 +169,6 @@ if __name__ == "__main__":
 
     o = {'T': 'expected', 'F': 'unexpected'}
     odf = get_outcomes()
-    odf['date'] = pd.to_datetime(odf['date'], unit='s')
     jodf = odf.groupby(by=['job', 'date', 'ok', 'result'])['count'] \
         .sum().unstack(level=2).unstack()
 
