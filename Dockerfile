@@ -6,7 +6,9 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY generate.py template.html ./
+COPY active_data.py generate.py template.html ./
+
+COPY queries ./queries/
 
 RUN mkdir -p /out
 
