@@ -10,7 +10,7 @@ class ActiveData(object):
 
     def __init__(self, use_cache=False):
         self.cache = '.cache'
-        if not os.path.exists(self.cache):
+        if use_cache and not os.path.exists(self.cache):
             os.makedirs(self.cache)
         self.url = 'http://activedata.allizom.org/query'
         self.use_cache = use_cache
@@ -27,8 +27,9 @@ class ActiveData(object):
         with open(os.path.join('queries', query + '.json'), 'r') as f:
             r = requests.post(self.url, data=f.read()).json()
             df = pd.DataFrame(r['data'], columns=r['header'])
-        with open(cache_path, 'w') as f:
-            df.to_pickle(cache_path)
+        if self.use_cache:
+            with open(cache_path, 'w') as f:
+                df.to_pickle(cache_path)
         return df
 
     def get_total_durations(self):
