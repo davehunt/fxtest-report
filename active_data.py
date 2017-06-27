@@ -31,8 +31,22 @@ class ActiveData(object):
             df.to_pickle(cache_path)
         return df
 
-    def get_durations(self):
-        df = self._get_data('durations')
+    def get_total_durations(self):
+        df = self._get_data('total_durations')
+        df['date'] = pd.to_datetime(df['date'], unit='s')
+        df.sort_values('date', inplace=True)
+        df.set_index('date', inplace=True)
+        return df
+
+    def get_job_durations(self):
+        df = self._get_data('job_durations')
+        df['date'] = pd.to_datetime(df['date'], unit='s')
+        df.sort_values(by=['job', 'date'], inplace=True)
+        df.set_index(['job', 'date'], inplace=True)
+        return df
+
+    def get_test_durations(self):
+        df = self._get_data('test_durations')
         df['failures'] = df['failures'].astype(int)
         df['pass'] = 1 - df['failures']/df['count']  # calculate pass rate
         return df

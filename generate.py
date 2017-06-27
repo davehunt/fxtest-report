@@ -36,23 +36,25 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     ad = ActiveData(use_cache=args.use_cache)
-    ddf = ad.get_durations()
+    tddf = ad.get_test_durations()
     generated = datetime.now()
-    start = datetime.fromtimestamp(ddf['start'].min())
-    end = datetime.fromtimestamp(ddf['end'].max())
+    start = datetime.fromtimestamp(tddf['start'].min())
+    end = datetime.fromtimestamp(tddf['end'].max())
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.html')
     template_vars = {
-        'total': '{:,}'.format(ddf['count'].sum()),
+        'total': '{:,}'.format(tddf['count'].sum()),
         'start':  start.strftime('%d-%b-%Y'),
         'end': end.strftime('%d-%b-%Y'),
         'generated': {
             'date': generated.strftime('%d-%b-%Y'),
             'time': generated.strftime('%H:%M:%S')},
-        'lowest_pass_rate': ad.get_lowest_pass_rate(ddf),
-        'most_failing': ad.get_most_failing(ddf),
-        'slowest': ad.get_slowest(ddf),
-        'longest': ad.get_longest(ddf)}
+        'lowest_pass_rate': ad.get_lowest_pass_rate(tddf),
+        'most_failing': ad.get_most_failing(tddf),
+        'slowest': ad.get_slowest(tddf),
+        'longest': ad.get_longest(tddf)}
+
+    jddf = ad.get_job_durations()
 
     o = {'T': 'expected', 'F': 'unexpected'}
     odf = ad.get_outcomes()
@@ -60,8 +62,8 @@ if __name__ == "__main__":
         .sum().unstack(level=2).unstack()
 
     jobs = jodf.index.levels[0]
-    fig, axes = plt.subplots(len(jobs) + 1, 2, sharex=True, figsize=(10, 40))
-    plt.subplots_adjust(hspace=0.3, wspace=0.2)
+    fig, axes = plt.subplots(len(jobs) + 1, 3, sharex=True, figsize=(15, 40))
+    plt.subplots_adjust(hspace=0.2, wspace=0.15)
 
     todf = odf.groupby(by=['date', 'ok', 'result'])['count'] \
         .sum().unstack(level=1).unstack()
@@ -71,12 +73,23 @@ if __name__ == "__main__":
         a.legend(loc='upper left', frameon=True).set_title('')
 
     for job, ax in zip(jobs, axes[1:]):
-        for ok, ax in zip(o.keys(), ax):
+        for ok, ax in zip(o.keys(), ax[:2]):
             t = '{} ({} outcomes)'.format(job, o[ok])
             a = jodf.loc[job][ok].plot(ax=ax, title=t)
             a.legend(loc='upper left', frameon=True).set_title('')
             a.set_ylim(ymin=0)
             a.set_xlabel('')
+
+    tddf = ad.get_total_durations()
+    tddf.plot(ax=axes[0][2], title='all jobs (durations)')
+    a.legend(loc='upper left', frameon=True).set_title('')
+    a.set_xlabel('')
+
+    for job, ax in zip(jobs, axes[1:]):
+        t = '{} (durations)'.format(job)
+        a = jddf.loc[job].plot(ax=ax[2], title=t)
+        a.legend(loc='upper left', frameon=True).set_title('')
+        a.set_xlabel('')
 
     fig.savefig(
         os.path.join(os.path.dirname(args.output), 'overview.png'),

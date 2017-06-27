@@ -2,11 +2,6 @@
   "from": "fx-test",
   "edges": [
     {
-      "name": "job",
-      "value": "run.job_name",
-      "allowNulls": false
-    },
-    {
       "name": "date",
       "value": "result.end_time",
       "allowNulls": false,
