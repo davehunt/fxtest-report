@@ -12,4 +12,4 @@ RUN mkdir -p /out
 
 VOLUME ["/out"]
 
-CMD python generate.py /out/report.html
+CMD python generate.py -o /out/report.html

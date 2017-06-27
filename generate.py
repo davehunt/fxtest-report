@@ -1,6 +1,6 @@
+import argparse
 from datetime import datetime
 import os
-import sys
 
 from colour import Color
 from humanize import naturaldelta
@@ -149,6 +149,12 @@ def get_longest_tests(df, job, limit=10):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description='Generate report of Firefox Test Engineering results')
+    parser.add_argument('-o', dest='output', default='report.html',
+                        help='path to write the report')
+    args = parser.parse_args()
+
     ddf = get_durations()
     generated = datetime.now()
     start = datetime.fromtimestamp(ddf['start'].min())
@@ -191,11 +197,10 @@ if __name__ == "__main__":
             a.set_ylim(ymin=0)
             a.set_xlabel('')
 
-    path = sys.argv[1]
     fig.savefig(
-        os.path.join(os.path.dirname(path), 'overview.png'),
+        os.path.join(os.path.dirname(args.output), 'overview.png'),
         bbox_inches='tight', pad_inches=0)
 
     html = template.render(template_vars)
-    with open(path, 'w') as f:
+    with open(args.output, 'w') as f:
         f.writelines(html)
