@@ -100,26 +100,23 @@ class ActiveData(object):
                 for j in self.get_most_failing_jobs(df)]
 
     def get_most_failing_jobs(self, df, limit=10):
-        jobs = df.groupby(by='job', sort=False).sum() \
+        df = df.groupby(by='job', sort=False).sum() \
             .sort_values('failures', ascending=False) \
-            .reset_index()[:limit] \
-            .to_dict(orient='records')
-        for j in jobs:
-            j['color'] = self._get_color(j['failures'], 500)
-        return jobs
+            .reset_index()[:limit]
+        df['color'] = df['failures'].apply(lambda x: self._get_color(x, 500))
+        return df.to_dict(orient='records')
 
     def get_most_failing_tests(self, df, job, limit=10):
-        tests = df[df['job'] == job] \
-            .sort_values('failures', ascending=False)[:limit] \
-            .to_dict(orient='records')
-        for t in tests:
-            t['color'] = self._get_color(t['failures'], 50)
-        return tests
+        df = df[df['job'] == job] \
+            .sort_values('failures', ascending=False)[:limit]
+        df['color'] = df['failures'].apply(lambda x: self._get_color(x, 50))
+        return df.to_dict(orient='records')
 
     def get_slowest(self, df):
         return [{
             'job': j['job'],
             'duration': j['duration'],
+            'color': j['color'],
             'tests': self.get_slowest_tests(df, j['job'])}
                 for j in self.get_slowest_jobs(df)]
 
@@ -128,12 +125,14 @@ class ActiveData(object):
             .sort_values('d90', ascending=False) \
             .reset_index()[:limit]
         df['duration'] = df['d90'].apply(lambda x: naturaldelta(x))
+        df['color'] = df['d90'].apply(lambda x: self._get_color(x, 1800, 600))
         return df.to_dict(orient='records')
 
     def get_slowest_tests(self, df, job, limit=10):
         df = df[df['job'] == job] \
             .sort_values('d90', ascending=False)[:limit]
         df['duration'] = df['d90'].apply(lambda x: naturaldelta(x))
+        df['color'] = df['d90'].apply(lambda x: self._get_color(x, 90, 30))
         return df.to_dict(orient='records')
 
     def get_longest(self, df):
