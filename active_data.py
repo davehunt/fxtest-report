@@ -64,21 +64,21 @@ class ActiveData(object):
         return df
 
     def get_lowest_pass_rate(self, df):
-        return self.get_lowest_pass_rate_jobs(df)
+        return [{
+            'job': j['job'],
+            'percent': j['percent'],
+            'color': j['color'],
+            'tests': self.get_lowest_pass_rate_tests(df, j['job'])}
+                for j in self.get_lowest_pass_rate_jobs(df)]
 
     def get_lowest_pass_rate_jobs(self, df, limit=10):
         jdf = df.groupby(by='job', sort=False).sum()
         jdf['pass'] = 1 - jdf['failures']/jdf['count']  # recalculate pass rate
-        jobs = jdf.sort_values('pass', ascending=True) \
-            .reset_index()[:limit] \
-            .to_dict(orient='records')
-        for j in jobs:
-            pc = j['pass'] * 100
-            j['pass'] = {
-                'percent': '{0:.0f}%'.format(pc),
-                'color': self._get_color(100 - pc, 20)}
-            j['tests'] = self.get_lowest_pass_rate_tests(df, j['job'])
-        return jobs
+        df = jdf.sort_values('pass', ascending=True).reset_index()[:limit]
+        df['percent'] = df['pass'].apply(lambda x: '{0:.0f}%'.format(x * 100))
+        df['color'] = df['pass'].apply(
+            lambda x: self._get_color(100 - (x * 100), 20))
+        return df.to_dict(orient='records')
 
     def get_lowest_pass_rate_tests(self, df, job, limit=10):
         df = df[df['job'] == job] \
