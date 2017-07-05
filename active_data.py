@@ -139,6 +139,7 @@ class ActiveData(object):
         return [{
             'job': j['job'],
             'duration': j['duration'],
+            'color': j['color'],
             'tests': self.get_longest_tests(df, j['job'])}
                 for j in self.get_longest_jobs(df)]
 
@@ -147,10 +148,12 @@ class ActiveData(object):
             .sort_values('dtotal', ascending=False) \
             .reset_index()[:limit]
         df['duration'] = df['dtotal'].apply(lambda x: naturaldelta(x))
+        df['color'] = df['dtotal'].apply(lambda x: self._get_color(x, 259200))
         return df.to_dict(orient='records')
 
     def get_longest_tests(self, df, job, limit=10):
         df = df[df['job'] == job] \
             .sort_values('dtotal', ascending=False)[:limit]
         df['duration'] = df['dtotal'].apply(lambda x: naturaldelta(x))
+        df['color'] = df['dtotal'].apply(lambda x: self._get_color(x, 10800))
         return df.to_dict(orient='records')
