@@ -76,7 +76,7 @@ class ActiveData(object):
             pc = j['pass'] * 100
             j['pass'] = {
                 'percent': '{0:.0f}%'.format(pc),
-                'color': self._get_color(100 - pc, _max=20)}
+                'color': self._get_color(100 - pc, 20)}
             j['tests'] = self.get_lowest_pass_rate_tests(df, j['job'])
         return jobs
 
@@ -88,26 +88,33 @@ class ActiveData(object):
             pc = t['pass'] * 100
             t['pass'] = {
                 'percent': '{0:.0f}%'.format(pc),
-                'color': self._get_color(100 - pc, _max=20)}
+                'color': self._get_color(100 - pc, 20)}
         return tests
 
     def get_most_failing(self, df):
         return [{
             'job': j['job'],
             'failures': j['failures'],
+            'color': j['color'],
             'tests': self.get_most_failing_tests(df, j['job'])}
                 for j in self.get_most_failing_jobs(df)]
 
     def get_most_failing_jobs(self, df, limit=10):
-        return df.groupby(by='job', sort=False).sum() \
+        jobs = df.groupby(by='job', sort=False).sum() \
             .sort_values('failures', ascending=False) \
             .reset_index()[:limit] \
             .to_dict(orient='records')
+        for j in jobs:
+            j['color'] = self._get_color(j['failures'], 500)
+        return jobs
 
     def get_most_failing_tests(self, df, job, limit=10):
-        return df[df['job'] == job] \
+        tests = df[df['job'] == job] \
             .sort_values('failures', ascending=False)[:limit] \
             .to_dict(orient='records')
+        for t in tests:
+            t['color'] = self._get_color(t['failures'], 50)
+        return tests
 
     def get_slowest(self, df):
         return [{

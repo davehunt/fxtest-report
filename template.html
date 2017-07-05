@@ -119,11 +119,14 @@
     <div>
       <input id="mf_{{ j.job }}" type="checkbox" class="toggle" />
       <label for="mf_{{ j.job }}">
-        {{ j.job }} <span class="total">{{ j.failures }}</span>
+        {{ j.job }}
+        <span class="total" style="background-color: {{ j.color }}">
+          {{ j.failures }}
+        </span>
       </label>
       <table>
         {% for t in j.tests %}
-        <tr>
+        <tr style="background-color: {{ t.color }}">
           <td title="{{ t.test_id }}">{{ t.test_name }}</td>
           <td>{{ t.failures }}</td>
         </tr>
