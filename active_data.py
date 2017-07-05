@@ -15,6 +15,12 @@ class ActiveData(object):
         self.url = 'http://activedata.allizom.org/query'
         self.use_cache = use_cache
 
+    def _get_color(self, value, _max, _min=0):
+        spectrum = list(Color('lime').range_to(Color('red'), 100))
+        percent = ((value - _min) / (_max - _min)) * 100
+        index = int(max(0, min(99, percent)))
+        return spectrum[index].hex
+
     def _get_data(self, query):
         cache_path = os.path.join(self.cache, query)
         if self.use_cache:
@@ -61,7 +67,6 @@ class ActiveData(object):
         return self.get_lowest_pass_rate_jobs(df)
 
     def get_lowest_pass_rate_jobs(self, df, limit=10):
-        colors = list(Color('red').range_to(Color('lime'), 101))
         jdf = df.groupby(by='job', sort=False).sum()
         jdf['pass'] = 1 - jdf['failures']/jdf['count']  # recalculate pass rate
         jobs = jdf.sort_values('pass', ascending=True) \
@@ -71,12 +76,11 @@ class ActiveData(object):
             pc = j['pass'] * 100
             j['pass'] = {
                 'percent': '{0:.0f}%'.format(pc),
-                'color': colors[int(pc)].hex}
+                'color': self._get_color(100 - pc, _max=20)}
             j['tests'] = self.get_lowest_pass_rate_tests(df, j['job'])
         return jobs
 
     def get_lowest_pass_rate_tests(self, df, job, limit=10):
-        colors = list(Color('red').range_to(Color('lime'), 101))
         tests = df[df['job'] == job] \
             .sort_values('pass', ascending=True)[:limit] \
             .to_dict(orient='records')
@@ -84,7 +88,7 @@ class ActiveData(object):
             pc = t['pass'] * 100
             t['pass'] = {
                 'percent': '{0:.0f}%'.format(pc),
-                'color': colors[int(pc)].hex}
+                'color': self._get_color(100 - pc, _max=20)}
         return tests
 
     def get_most_failing(self, df):
