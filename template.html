@@ -104,9 +104,9 @@
       </label>
       <table>
         {% for t in j.tests %}
-        <tr style="background-color: {{ t.pass.color }}">
+        <tr style="background-color: {{ t.color }}">
           <td title="{{ t.test_id }}">{{ t.test_name }}</td>
-          <td>{{ t.pass.percent }}</td>
+          <td>{{ t.percent }}</td>
         </tr>
         {% endfor %}
       </table>

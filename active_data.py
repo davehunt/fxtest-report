@@ -81,15 +81,12 @@ class ActiveData(object):
         return jobs
 
     def get_lowest_pass_rate_tests(self, df, job, limit=10):
-        tests = df[df['job'] == job] \
-            .sort_values('pass', ascending=True)[:limit] \
-            .to_dict(orient='records')
-        for t in tests:
-            pc = t['pass'] * 100
-            t['pass'] = {
-                'percent': '{0:.0f}%'.format(pc),
-                'color': self._get_color(100 - pc, 20)}
-        return tests
+        df = df[df['job'] == job] \
+            .sort_values('pass', ascending=True)[:limit]
+        df['percent'] = df['pass'].apply(lambda x: '{0:.0f}%'.format(x * 100))
+        df['color'] = df['pass'].apply(
+            lambda x: self._get_color(100 - (x * 100), 20))
+        return df.to_dict(orient='records')
 
     def get_most_failing(self, df):
         return [{
