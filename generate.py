@@ -49,9 +49,14 @@ if __name__ == "__main__":
         os.makedirs(args.output)
 
     ad = ActiveData(use_cache=args.use_cache)
+
     summary = ad.get_summary()
-    jobs = ad.get_jobs()
-    tddf = ad.get_test_durations()
+    durations = ad.get_durations()
+    durations_by_job = ad.get_durations_by_job()
+    durations_by_test = ad.get_durations_by_test()
+    failures = ad.get_failures()
+    failures_by_job = ad.get_failures_by_job()
+
     generated = datetime.now()
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.html')
@@ -64,42 +69,31 @@ if __name__ == "__main__":
             'total': '{:,}'.format(summary.total[0]),
             'start': summary.start[0].strftime('%d-%b-%Y'),
             'end': summary.end[0].strftime('%d-%b-%Y')},
-        'lowest_pass_rate': ad.get_lowest_pass_rate(tddf),
-        'most_failing': ad.get_most_failing(tddf),
-        'slowest': ad.get_slowest(tddf),
-        'longest': ad.get_longest(tddf),
-        'jobs': list(jobs.index.levels[0])}
-
-    o = {'T': 'expected', 'F': 'unexpected'}
-    odf = ad.get_outcomes()
+        'lowest_pass_rate': ad.get_lowest_pass_rate(durations_by_test),
+        'most_failing': ad.get_most_failing(durations_by_test),
+        'slowest': ad.get_slowest(durations_by_test),
+        'longest': ad.get_longest(durations_by_test),
+        'jobs': list(durations_by_job.index.levels[0])}
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 2))
-    todf = odf.groupby(by=['date', 'ok', 'result'])['count'] \
-        .sum().unstack(level=1).unstack()
-    for ok, ax in zip(o.keys(), axes[:2]):
-        a = todf[ok].plot(ax=ax, title='all jobs ({} outcomes)'.format(o[ok]))
-        format_axis(a)
-
-    tddf = ad.get_total_durations()
-    a = tddf.plot(ax=axes[2], title='all jobs (durations)')
-    format_axis(a)
+    format_axis(durations.distinct.plot(ax=axes[0], title='tests'))
+    format_axis(durations.elapsed.plot(ax=axes[1], title='durations'))
+    format_axis(failures.plot(ax=axes[2], title='failures'))
 
     fig.savefig(
         os.path.join(args.output, 'total.png'),
         bbox_inches='tight', pad_inches=0)
 
-    failures_by_job = ad.get_failures_by_job()
-
-    for job in jobs.index.levels[0]:
+    for job in durations_by_job.index.levels[0]:
         fig, axes = plt.subplots(1, 3, figsize=(15, 2))
-        t = '{} (tests)'.format(job)
-        a = jobs.distinct.loc[job].plot(ax=axes[0], title=t)
-        format_axis(a)
-        t = '{} (durations)'.format(job)
-        a = jobs.elapsed.loc[job].plot(ax=axes[1], title=t)
-        format_axis(a)
+        t = 'tests ({})'.format(job)
+        format_axis(durations_by_job.distinct.loc[job].plot(
+            ax=axes[0], title=t))
+        t = 'durations ({})'.format(job)
+        format_axis(durations_by_job.elapsed.loc[job].plot(
+            ax=axes[1], title=t))
         try:
-            t = '{} (failures)'.format(job)
+            t = 'failures ({})'.format(job)
             a = failures_by_job.loc[job].plot(ax=axes[2], title=t)
             format_axis(a)
         except KeyError:

@@ -38,25 +38,38 @@ class ActiveData(object):
                 df.to_pickle(cache_path)
         return df
 
+    def get_durations(self):
+        df = self._get_data('durations')
+        df['date'] = pd.to_datetime(df['date'], unit='s')
+        df.sort_values('date', inplace=True)
+        df.set_index('date', inplace=True)
+        return df
+
+    def get_durations_by_job(self):
+        df = self._get_data('durations_by_job')
+        df['date'] = pd.to_datetime(df['date'], unit='s')
+        df.sort_values(by=['job', 'date'], inplace=True)
+        df.set_index(['job', 'date'], inplace=True)
+        return df
+
+    def get_durations_by_test(self):
+        df = self._get_data('durations_by_test')
+        df['failures'] = df['failures'].astype(int)
+        df['pass'] = 1 - df['failures']/df['count']  # calculate pass rate
+        return df
+
     def get_summary(self):
         df = self._get_data('summary')
         df['start'] = pd.to_datetime(df['start'], unit='s')
         df['end'] = pd.to_datetime(df['end'], unit='s')
         return df
 
-    def get_total_durations(self):
-        df = self._get_data('total_durations')
+    def get_failures(self):
+        df = self._get_data('failures')
+        df.distinct.fillna(0, inplace=True)
         df['date'] = pd.to_datetime(df['date'], unit='s')
-        df.sort_values('date', inplace=True)
-        df.set_index('date', inplace=True)
-        return df
-
-    def get_jobs(self):
-        df = self._get_data('jobs')
-        df['date'] = pd.to_datetime(df['date'], unit='s')
-        df.sort_values(by=['job', 'date'], inplace=True)
-        df.set_index(['job', 'date'], inplace=True)
-        return df
+        return df.groupby(by=['date', 'result'])['distinct'] \
+            .sum().unstack(level=1)
 
     def get_failures_by_job(self):
         df = self._get_data('failures_by_job')
@@ -64,17 +77,6 @@ class ActiveData(object):
         df['date'] = pd.to_datetime(df['date'], unit='s')
         return df.groupby(by=['job', 'date', 'result'])['distinct'] \
             .sum().unstack(level=2)
-
-    def get_test_durations(self):
-        df = self._get_data('test_durations')
-        df['failures'] = df['failures'].astype(int)
-        df['pass'] = 1 - df['failures']/df['count']  # calculate pass rate
-        return df
-
-    def get_outcomes(self):
-        df = self._get_data('outcomes')
-        df['date'] = pd.to_datetime(df['date'], unit='s')
-        return df
 
     def get_lowest_pass_rate(self, df):
         return [{
