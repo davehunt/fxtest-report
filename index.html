@@ -1,0 +1,2567 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <style>
+      * {
+        font-family:"Helvetica Neue", Helvetica, Sans-serif;
+      }
+
+      h1 {
+        font-size:40px;
+        font-weight:bold;
+        color:#191919;
+      }
+
+      h2 {
+        font-weight:normal;
+        font-size:20px;
+        padding:5px 0;
+      }
+
+      table {
+        margin: 5px 0;
+        width: 800px;
+        display: none;
+        visibility: hidden;
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      table td {
+        border: 1px solid black;
+        padding: 2px;
+      }
+
+      table tr {
+        background-color: #ddd;
+      }
+
+      .figure {
+        clear: both;
+        padding: 10px 0;
+      }
+
+      .wrapper {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 10px;
+      }
+
+      .toggle {
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .toggle + label {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .toggle + label:before {
+        content:"\25B6\A0"
+      }
+
+      .toggle:checked ~ table {
+        display: table;
+        visibility: visible;
+      }
+
+      .toggle:checked + label:before {
+        content:"\25BC\A0"
+      }
+
+      .total {
+        border-radius: 8px;
+        background: #ddd;
+        padding: 0 0.5em;
+        font-size: 85%;
+      }
+    </style>
+    <meta charset="UTF-8">
+    <title>Firefox Test Engineering Test Results</title>
+  </head>
+  <body>
+    <a href="https://github.com/davehunt/fxtest-report">
+      <img
+        style="position: absolute; top: 0; right: 0; border: 0;"
+        src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67"
+        alt="Fork me on GitHub"
+        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png">
+    </a>
+    <h1>Firefox Test Engineering Test Results</h1>
+    <p>Generated on <strong>02-Aug-2017</strong> at
+      <strong>20:20:01</strong>.</p>
+    <p>A total of <strong>853</strong> tests ran
+      <strong>4,050,283</strong> times between
+      <strong>07-Jun-2017</strong> and
+      <strong>02-Aug-2017</strong>.</p>
+
+    <img class="figure" src="total.png" />
+
+    
+    <img class="figure" src="amo.dev.png" />
+    
+    <img class="figure" src="amo.prod.png" />
+    
+    <img class="figure" src="amo.stage.png" />
+    
+    <img class="figure" src="fxapom.stage.png" />
+    
+    <img class="figure" src="go-bouncer.prod.png" />
+    
+    <img class="figure" src="go-bouncer.stage.png" />
+    
+    <img class="figure" src="mozillians.dev.png" />
+    
+    <img class="figure" src="mozillians.prod.png" />
+    
+    <img class="figure" src="mozillians.stage.png" />
+    
+    <img class="figure" src="snippets.prod.png" />
+    
+    <img class="figure" src="snippets.stage.png" />
+    
+    <img class="figure" src="socorro.prod.png" />
+    
+    <img class="figure" src="socorro.stage.png" />
+    
+    <img class="figure" src="stubattribution.prod.png" />
+    
+    <img class="figure" src="stubattribution.stage.png" />
+    
+    <img class="figure" src="treeherder.stage.png" />
+    
+
+    <h2>Tests with lowest pass rate</h2>
+    <p>Percentage of tests that had the expected outcome.</p>
+    
+    <div>
+      <input id="lpr_mozillians.dev" type="checkbox" class="toggle" />
+      <label for="lpr_mozillians.dev">
+        mozillians.dev
+        <span class="total" style="background-color: #f00">
+          49%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_city_works">test_that_filter_by_city_works</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_region_works">test_that_filter_by_region_works</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_search_for_empty_string_redirects_to_search_page">test_search_for_empty_string_redirects_to_search_page</td>
+          <td>10%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_irc_nickname">test_that_search_returns_results_for_irc_nickname</td>
+          <td>10%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_group.py::TestGroup::()::test_group_description_edit">test_group_description_edit</td>
+          <td>10%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_country_works">test_that_filter_by_country_works</td>
+          <td>10%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_first_name">test_that_search_returns_results_for_first_name</td>
+          <td>14%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_deletion">test_skill_deletion</td>
+          <td>34%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_addition">test_skill_addition</td>
+          <td>45%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_create_and_delete_group">test_that_user_can_create_and_delete_group</td>
+          <td>48%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_treeherder.stage" type="checkbox" class="toggle" />
+      <label for="lpr_treeherder.stage">
+        treeherder.stage
+        <span class="total" style="background-color: #f00">
+          56%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_keyword.py::test_filter_by_job_keyword">test_filter_by_job_keyword</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_load_page_results.py::test_load_next_results">test_load_next_results</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_expanding_group_count.py::test_expanding_group_count">test_expanding_group_count</td>
+          <td>21%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_filter_panel.py::test_filter_by_test_status">test_filter_by_test_status</td>
+          <td>22%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_unclassified_job.py::test_unclassified_failure">test_unclassified_failure</td>
+          <td>26%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_range.py::test_set_as_top_of_range">test_set_as_top_of_range</td>
+          <td>28%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_view_single_result.py::test_open_single_result">test_open_single_result</td>
+          <td>28%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_pin_job.py::test_clear_pinboard">test_clear_pinboard</td>
+          <td>31%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_unclassified_job.py::test_open_unclassified_failure_log">test_open_unclassified_failure_log</td>
+          <td>33%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_switch_repo.py::test_switch_repo">test_switch_repo</td>
+          <td>34%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_mozillians.stage" type="checkbox" class="toggle" />
+      <label for="lpr_mozillians.stage">
+        mozillians.stage
+        <span class="total" style="background-color: #f00">
+          70%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_search_for_not_existing_mozillian_when_logged_in">test_search_for_not_existing_mozillian_when_logged_in</td>
+          <td>41%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_group.py::TestGroup::()::test_group_description_edit">test_group_description_edit</td>
+          <td>46%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_first_name">test_that_search_returns_results_for_first_name</td>
+          <td>59%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_irc_nickname">test_that_search_returns_results_for_irc_nickname</td>
+          <td>59%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_create_and_delete_group">test_that_user_can_create_and_delete_group</td>
+          <td>61%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_region_works">test_that_filter_by_region_works</td>
+          <td>64%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_email_substring">test_that_search_returns_results_for_email_substring</td>
+          <td>64%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_city_works">test_that_filter_by_city_works</td>
+          <td>64%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_non_us_user_can_set_get_involved_date">test_that_non_us_user_can_set_get_involved_date</td>
+          <td>66%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_addition">test_skill_addition</td>
+          <td>66%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_socorro.stage" type="checkbox" class="toggle" />
+      <label for="lpr_socorro.stage">
+        socorro.stage
+        <span class="total" style="background-color: #ffe300">
+          89%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_api.py::TestAPI::()::test_public_api_navigation">test_public_api_navigation</td>
+          <td>76%</td>
+        </tr>
+        
+        <tr style="background-color: #ff0a00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_top_crasher_reports_tab_has_uuid_report">test_top_crasher_reports_tab_has_uuid_report</td>
+          <td>80%</td>
+        </tr>
+        
+        <tr style="background-color: #ff4300">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_browser_reports_have_browser_icon">test_that_only_browser_reports_have_browser_icon</td>
+          <td>83%</td>
+        </tr>
+        
+        <tr style="background-color: #ff4800">
+          <td title="tests/test_search.py::TestSearchForSpecificResults::()::test_selecting_one_version_doesnt_show_other_versions">test_selecting_one_version_doesnt_show_other_versions</td>
+          <td>83%</td>
+        </tr>
+        
+        <tr style="background-color: #ff4800">
+          <td title="tests/test_search.py::TestSearchForSpecificResults::()::test_search_for_valid_signature">test_search_for_valid_signature</td>
+          <td>83%</td>
+        </tr>
+        
+        <tr style="background-color: #ff5200">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crasher_filter_browser_return_results">test_that_top_crasher_filter_browser_return_results</td>
+          <td>83%</td>
+        </tr>
+        
+        <tr style="background-color: #ff5200">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crasher_filter_all_return_results">test_that_top_crasher_filter_all_return_results</td>
+          <td>83%</td>
+        </tr>
+        
+        <tr style="background-color: #ff6200">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_change_column">test_search_change_column</td>
+          <td>84%</td>
+        </tr>
+        
+        <tr style="background-color: #ff6700">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crasher_filter_plugin_return_results">test_that_top_crasher_filter_plugin_return_results</td>
+          <td>84%</td>
+        </tr>
+        
+        <tr style="background-color: #ff6700">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_with_multiple_lines">test_search_with_multiple_lines</td>
+          <td>84%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_amo.dev" type="checkbox" class="toggle" />
+      <label for="lpr_amo.dev">
+        amo.dev
+        <span class="total" style="background-color: #a5ff00">
+          94%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_the_development_channel_section">test_the_development_channel_section</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_collections.py::TestCollections::()::test_user_my_favorites_page">test_user_my_favorites_page</td>
+          <td>11%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_statistics.py::test_that_verifies_the_url_of_the_statistics_page">test_that_verifies_the_url_of_the_statistics_page</td>
+          <td>20%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_addon_number_of_total_downloads_is_correct">test_that_addon_number_of_total_downloads_is_correct</td>
+          <td>20%</td>
+        </tr>
+        
+        <tr style="background-color: #ff0500">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_searching_for_complete_themes">test_searching_for_complete_themes</td>
+          <td>80%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_mozillians.prod" type="checkbox" class="toggle" />
+      <label for="lpr_mozillians.prod">
+        mozillians.prod
+        <span class="total" style="background-color: #6cff00">
+          96%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_search_for_not_existing_mozillian_when_logged_in">test_search_for_not_existing_mozillian_when_logged_in</td>
+          <td>24%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_city_works">test_that_filter_by_city_works</td>
+          <td>66%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_region_works">test_that_filter_by_region_works</td>
+          <td>69%</td>
+        </tr>
+        
+        <tr style="background-color: #81ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_first_name">test_that_search_returns_results_for_first_name</td>
+          <td>95%</td>
+        </tr>
+        
+        <tr style="background-color: #52ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_view_external_accounts">test_that_user_can_view_external_accounts</td>
+          <td>97%</td>
+        </tr>
+        
+        <tr style="background-color: #52ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_irc_nickname">test_that_search_returns_results_for_irc_nickname</td>
+          <td>97%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_profile_deletion_confirmation">test_profile_deletion_confirmation</td>
+          <td>98%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_email_substring">test_that_search_returns_results_for_email_substring</td>
+          <td>98%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_links_in_the_services_page_return_200_code">test_that_links_in_the_services_page_return_200_code</td>
+          <td>98%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/test_account.py::TestAccount::()::test_login_logout">test_login_logout</td>
+          <td>98%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_amo.stage" type="checkbox" class="toggle" />
+      <label for="lpr_amo.stage">
+        amo.stage
+        <span class="total" style="background-color: #58ff00">
+          97%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_the_development_channel_section">test_the_development_channel_section</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out</td>
+          <td>46%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in</td>
+          <td>66%</td>
+        </tr>
+        
+        <tr style="background-color: #81ff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_that_checks_if_the_extensions_are_sorted_by_recently_updated">test_that_checks_if_the_extensions_are_sorted_by_recently_updated</td>
+          <td>95%</td>
+        </tr>
+        
+        <tr style="background-color: #52ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_searching_for_complete_themes">test_searching_for_complete_themes</td>
+          <td>97%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/desktop/test_complete_themes.py::TestCompleteThemes::()::test_that_complete_themes_loads_landing_page_correctly">test_that_complete_themes_loads_landing_page_correctly</td>
+          <td>98%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_downloads">test_sorting_by_downloads</td>
+          <td>98%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_amo.prod" type="checkbox" class="toggle" />
+      <label for="lpr_amo.prod">
+        amo.prod
+        <span class="total" style="background-color: #39ff00">
+          98%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_firebug_rating_is_correct">test_that_firebug_rating_is_correct</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_the_development_channel_section">test_the_development_channel_section</td>
+          <td>0%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_searching_for_a_tag_returns_results">test_that_searching_for_a_tag_returns_results</td>
+          <td>31%</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>39%</td>
+        </tr>
+        
+        <tr style="background-color: #a5ff00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_daily_users_in_api_equals_daily_users_in_details_page">test_that_daily_users_in_api_equals_daily_users_in_details_page</td>
+          <td>94%</td>
+        </tr>
+        
+        <tr style="background-color: #7cff00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_addon_number_of_total_downloads_is_correct">test_that_addon_number_of_total_downloads_is_correct</td>
+          <td>95%</td>
+        </tr>
+        
+        <tr style="background-color: #52ff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_addons_author_link">test_addons_author_link</td>
+          <td>97%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_that_register_login_link_is_present_in_addon_details_page">test_that_register_login_link_is_present_in_addon_details_page</td>
+          <td>98%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_reviews_in_api_equals_reviews_in_details_page">test_that_reviews_in_api_equals_reviews_in_details_page</td>
+          <td>98%</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/desktop/test_complete_themes.py::TestCompleteThemes::()::test_sorted_by_most_users_is_default">test_sorted_by_most_users_is_default</td>
+          <td>98%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_stubattribution.prod" type="checkbox" class="toggle" />
+      <label for="lpr_stubattribution.prod">
+        stubattribution.prod
+        <span class="total" style="background-color: #05ff00">
+          100%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/test_stub_attribution_search.py::test_search_flow_param_values[google-paidsearch-Brand-US-GGL-Exact-download%20firefox]">test_search_flow_param_values</td>
+          <td>100%</td>
+        </tr>
+        
+        <tr style="background-color: #05ff00">
+          <td title="tests/test_stub_attribution_campaign.py::test_campaign_flow_param_values[google-paidsearch-Fake%20campaign-test term]">test_campaign_flow_param_values</td>
+          <td>100%</td>
+        </tr>
+        
+        <tr style="background-color: #05ff00">
+          <td title="tests/test_stub_attribution_organic.py::test_organic_flow_param_values">test_organic_flow_param_values</td>
+          <td>100%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lpr_stubattribution.stage" type="checkbox" class="toggle" />
+      <label for="lpr_stubattribution.stage">
+        stubattribution.stage
+        <span class="total" style="background-color: #05ff00">
+          100%
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #05ff00">
+          <td title="tests/test_stub_attribution_campaign.py::test_campaign_flow_param_values[google-paidsearch-Fake%20campaign-test term]">test_campaign_flow_param_values</td>
+          <td>100%</td>
+        </tr>
+        
+        <tr style="background-color: #05ff00">
+          <td title="tests/test_stub_attribution_organic.py::test_organic_flow_param_values">test_organic_flow_param_values</td>
+          <td>100%</td>
+        </tr>
+        
+        <tr style="background-color: #05ff00">
+          <td title="tests/test_stub_attribution_search.py::test_search_flow_param_values[google-paidsearch-Brand-US-GGL-Exact-download%20firefox]">test_search_flow_param_values</td>
+          <td>100%</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+
+    <h2>Tests with most failures</h2>
+    <p>Tests with the highest total number of failures.</p>
+    
+    <div>
+      <input id="mf_socorro.stage" type="checkbox" class="toggle" />
+      <label for="mf_socorro.stage">
+        socorro.stage
+        <span class="total" style="background-color: #f00">
+          2457
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_api.py::TestAPI::()::test_public_api_navigation">test_public_api_navigation</td>
+          <td>169</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_top_crasher_reports_tab_has_uuid_report">test_top_crasher_reports_tab_has_uuid_report</td>
+          <td>140</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_browser_reports_have_browser_icon">test_that_only_browser_reports_have_browser_icon</td>
+          <td>124</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearchForSpecificResults::()::test_selecting_one_version_doesnt_show_other_versions">test_selecting_one_version_doesnt_show_other_versions</td>
+          <td>122</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearchForSpecificResults::()::test_search_for_valid_signature">test_search_for_valid_signature</td>
+          <td>122</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crasher_filter_browser_return_results">test_that_top_crasher_filter_browser_return_results</td>
+          <td>120</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crasher_filter_all_return_results">test_that_top_crasher_filter_all_return_results</td>
+          <td>120</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_change_column">test_search_change_column</td>
+          <td>115</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crasher_filter_plugin_return_results">test_that_top_crasher_filter_plugin_return_results</td>
+          <td>114</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_with_multiple_lines">test_search_with_multiple_lines</td>
+          <td>113</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_go-bouncer.prod" type="checkbox" class="toggle" />
+      <label for="mf_go-bouncer.prod">
+        go-bouncer.prod
+        <span class="total" style="background-color: #f00">
+          942
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[osx]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>227</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[win]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>224</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[linux]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>219</td>
+        </tr>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[firefox-beta-latest-55.0b11-linux]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>10</td>
+        </tr>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[firefox-beta-latest-55.0b11-osx]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>10</td>
+        </tr>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[firefox-beta-latest-55.0b11-win]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>10</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_1_redirects_to_correct_version[esr-latest]">test_ie6_winxp_useragent_5_1_redirects_to_correct_version</td>
+          <td>7</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[firefox-beta-latest-55.0b10-linux]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>7</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[firefox-beta-latest-55.0b10-osx]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>7</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[firefox-beta-latest-55.0b10-win]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>7</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_treeherder.stage" type="checkbox" class="toggle" />
+      <label for="mf_treeherder.stage">
+        treeherder.stage
+        <span class="total" style="background-color: #f00">
+          841
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_load_page_results.py::test_load_next_results">test_load_next_results</td>
+          <td>58</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_keyword.py::test_filter_by_job_keyword">test_filter_by_job_keyword</td>
+          <td>58</td>
+        </tr>
+        
+        <tr style="background-color: #ff2400">
+          <td title="tests/test_expanding_group_count.py::test_expanding_group_count">test_expanding_group_count</td>
+          <td>46</td>
+        </tr>
+        
+        <tr style="background-color: #ff2e00">
+          <td title="tests/test_filter_panel.py::test_filter_by_test_status">test_filter_by_test_status</td>
+          <td>45</td>
+        </tr>
+        
+        <tr style="background-color: #ff4300">
+          <td title="tests/test_unclassified_job.py::test_unclassified_failure">test_unclassified_failure</td>
+          <td>43</td>
+        </tr>
+        
+        <tr style="background-color: #ff4d00">
+          <td title="tests/test_range.py::test_set_as_top_of_range">test_set_as_top_of_range</td>
+          <td>42</td>
+        </tr>
+        
+        <tr style="background-color: #ff4d00">
+          <td title="tests/test_view_single_result.py::test_open_single_result">test_open_single_result</td>
+          <td>42</td>
+        </tr>
+        
+        <tr style="background-color: #ff6200">
+          <td title="tests/test_pin_job.py::test_clear_pinboard">test_clear_pinboard</td>
+          <td>40</td>
+        </tr>
+        
+        <tr style="background-color: #ff6c00">
+          <td title="tests/test_unclassified_job.py::test_open_unclassified_failure_log">test_open_unclassified_failure_log</td>
+          <td>39</td>
+        </tr>
+        
+        <tr style="background-color: #ff7600">
+          <td title="tests/test_switch_repo.py::test_switch_repo">test_switch_repo</td>
+          <td>38</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_mozillians.stage" type="checkbox" class="toggle" />
+      <label for="mf_mozillians.stage">
+        mozillians.stage
+        <span class="total" style="background-color: #f00">
+          671
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ff9500">
+          <td title="tests/test_search.py::TestSearch::()::test_search_for_not_existing_mozillian_when_logged_in">test_search_for_not_existing_mozillian_when_logged_in</td>
+          <td>35</td>
+        </tr>
+        
+        <tr style="background-color: #ffb400">
+          <td title="tests/test_group.py::TestGroup::()::test_group_description_edit">test_group_description_edit</td>
+          <td>32</td>
+        </tr>
+        
+        <tr style="background-color: #f7ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_first_name">test_that_search_returns_results_for_first_name</td>
+          <td>24</td>
+        </tr>
+        
+        <tr style="background-color: #f7ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_irc_nickname">test_that_search_returns_results_for_irc_nickname</td>
+          <td>24</td>
+        </tr>
+        
+        <tr style="background-color: #edff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_create_and_delete_group">test_that_user_can_create_and_delete_group</td>
+          <td>23</td>
+        </tr>
+        
+        <tr style="background-color: #d8ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_region_works">test_that_filter_by_region_works</td>
+          <td>21</td>
+        </tr>
+        
+        <tr style="background-color: #d8ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_city_works">test_that_filter_by_city_works</td>
+          <td>21</td>
+        </tr>
+        
+        <tr style="background-color: #d8ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_email_substring">test_that_search_returns_results_for_email_substring</td>
+          <td>21</td>
+        </tr>
+        
+        <tr style="background-color: #ceff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_non_us_user_can_set_get_involved_date">test_that_non_us_user_can_set_get_involved_date</td>
+          <td>20</td>
+        </tr>
+        
+        <tr style="background-color: #ceff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_addition">test_skill_addition</td>
+          <td>20</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_amo.dev" type="checkbox" class="toggle" />
+      <label for="mf_amo.dev">
+        amo.dev
+        <span class="total" style="background-color: #f00">
+          586
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out</td>
+          <td>61</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in</td>
+          <td>61</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>61</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_the_development_channel_section">test_the_development_channel_section</td>
+          <td>61</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>61</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>61</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_collections.py::TestCollections::()::test_user_my_favorites_page">test_user_my_favorites_page</td>
+          <td>54</td>
+        </tr>
+        
+        <tr style="background-color: #ff0500">
+          <td title="tests/desktop/test_statistics.py::test_that_verifies_the_url_of_the_statistics_page">test_that_verifies_the_url_of_the_statistics_page</td>
+          <td>49</td>
+        </tr>
+        
+        <tr style="background-color: #ff0500">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_addon_number_of_total_downloads_is_correct">test_that_addon_number_of_total_downloads_is_correct</td>
+          <td>49</td>
+        </tr>
+        
+        <tr style="background-color: #7cff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_searching_for_complete_themes">test_searching_for_complete_themes</td>
+          <td>12</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_mozillians.dev" type="checkbox" class="toggle" />
+      <label for="mf_mozillians.dev">
+        mozillians.dev
+        <span class="total" style="background-color: #f00">
+          558
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ffd800">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_city_works">test_that_filter_by_city_works</td>
+          <td>29</td>
+        </tr>
+        
+        <tr style="background-color: #ffd800">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_region_works">test_that_filter_by_region_works</td>
+          <td>29</td>
+        </tr>
+        
+        <tr style="background-color: #fff200">
+          <td title="tests/test_search.py::TestSearch::()::test_search_for_empty_string_redirects_to_search_page">test_search_for_empty_string_redirects_to_search_page</td>
+          <td>26</td>
+        </tr>
+        
+        <tr style="background-color: #fff200">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_country_works">test_that_filter_by_country_works</td>
+          <td>26</td>
+        </tr>
+        
+        <tr style="background-color: #fff200">
+          <td title="tests/test_group.py::TestGroup::()::test_group_description_edit">test_group_description_edit</td>
+          <td>26</td>
+        </tr>
+        
+        <tr style="background-color: #fff200">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_irc_nickname">test_that_search_returns_results_for_irc_nickname</td>
+          <td>26</td>
+        </tr>
+        
+        <tr style="background-color: #fffc00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_first_name">test_that_search_returns_results_for_first_name</td>
+          <td>25</td>
+        </tr>
+        
+        <tr style="background-color: #c4ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_deletion">test_skill_deletion</td>
+          <td>19</td>
+        </tr>
+        
+        <tr style="background-color: #a5ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_addition">test_skill_addition</td>
+          <td>16</td>
+        </tr>
+        
+        <tr style="background-color: #9bff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_non_us_user_can_set_get_involved_date">test_that_non_us_user_can_set_get_involved_date</td>
+          <td>15</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_amo.stage" type="checkbox" class="toggle" />
+      <label for="mf_amo.stage">
+        amo.stage
+        <span class="total" style="background-color: #ffc900">
+          300
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_the_development_channel_section">test_the_development_channel_section</td>
+          <td>59</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>59</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>59</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>59</td>
+        </tr>
+        
+        <tr style="background-color: #ffb400">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out</td>
+          <td>32</td>
+        </tr>
+        
+        <tr style="background-color: #ceff00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_in</td>
+          <td>20</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_that_checks_if_the_extensions_are_sorted_by_recently_updated">test_that_checks_if_the_extensions_are_sorted_by_recently_updated</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_searching_for_complete_themes">test_searching_for_complete_themes</td>
+          <td>2</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/desktop/test_complete_themes.py::TestCompleteThemes::()::test_that_complete_themes_loads_landing_page_correctly">test_that_complete_themes_loads_landing_page_correctly</td>
+          <td>1</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/desktop/test_layout.py::TestAmoLayout::()::test_other_applications_thunderbird">test_other_applications_thunderbird</td>
+          <td>1</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_amo.prod" type="checkbox" class="toggle" />
+      <label for="mf_amo.prod">
+        amo.prod
+        <span class="total" style="background-color: #d8ff00">
+          214
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_the_development_channel_section">test_the_development_channel_section</td>
+          <td>62</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_firebug_rating_is_correct">test_that_firebug_rating_is_correct</td>
+          <td>53</td>
+        </tr>
+        
+        <tr style="background-color: #ff4300">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_searching_for_a_tag_returns_results">test_that_searching_for_a_tag_returns_results</td>
+          <td>43</td>
+        </tr>
+        
+        <tr style="background-color: #ff7600">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>38</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_daily_users_in_api_equals_daily_users_in_details_page">test_that_daily_users_in_api_equals_daily_users_in_details_page</td>
+          <td>4</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/desktop/test_details_page_against_xml.py::TestDetailsAgainstXML::()::test_that_addon_number_of_total_downloads_is_correct">test_that_addon_number_of_total_downloads_is_correct</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_addons_author_link">test_addons_author_link</td>
+          <td>2</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_next_button_is_disabled_on_the_last_page">test_next_button_is_disabled_on_the_last_page</td>
+          <td>1</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_that_register_login_link_is_present_in_addon_details_page">test_that_register_login_link_is_present_in_addon_details_page</td>
+          <td>1</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_that_checks_the_most_popular_section_exists">test_that_checks_the_most_popular_section_exists</td>
+          <td>1</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_go-bouncer.stage" type="checkbox" class="toggle" />
+      <label for="mf_go-bouncer.stage">
+        go-bouncer.stage
+        <span class="total" style="background-color: #af0">
+          166
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ceff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[linux]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>20</td>
+        </tr>
+        
+        <tr style="background-color: #ceff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[osx]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>20</td>
+        </tr>
+        
+        <tr style="background-color: #ceff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[win]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>20</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_2_redirects_to_correct_version[sha1]">test_ie6_winxp_useragent_5_2_redirects_to_correct_version</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_1_redirects_to_correct_version[beta]">test_ie6_winxp_useragent_5_1_redirects_to_correct_version</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_2_redirects_to_correct_version[esr-stub]">test_ie6_winxp_useragent_5_2_redirects_to_correct_version</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_2_redirects_to_correct_version[beta]">test_ie6_winxp_useragent_5_2_redirects_to_correct_version</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_1_redirects_to_correct_version[beta-stub]">test_ie6_winxp_useragent_5_1_redirects_to_correct_version</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_2_redirects_to_correct_version[42.0]">test_ie6_winxp_useragent_5_2_redirects_to_correct_version</td>
+          <td>2</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_2_redirects_to_correct_version[43.0.1]">test_ie6_winxp_useragent_5_2_redirects_to_correct_version</td>
+          <td>2</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="mf_mozillians.prod" type="checkbox" class="toggle" />
+      <label for="mf_mozillians.prod">
+        mozillians.prod
+        <span class="total" style="background-color: #62ff00">
+          95
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ff2e00">
+          <td title="tests/test_search.py::TestSearch::()::test_search_for_not_existing_mozillian_when_logged_in">test_search_for_not_existing_mozillian_when_logged_in</td>
+          <td>45</td>
+        </tr>
+        
+        <tr style="background-color: #ceff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_city_works">test_that_filter_by_city_works</td>
+          <td>20</td>
+        </tr>
+        
+        <tr style="background-color: #b9ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_region_works">test_that_filter_by_region_works</td>
+          <td>18</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_first_name">test_that_search_returns_results_for_first_name</td>
+          <td>3</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_view_external_accounts">test_that_user_can_view_external_accounts</td>
+          <td>2</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_irc_nickname">test_that_search_returns_results_for_irc_nickname</td>
+          <td>2</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/test_account.py::TestAccount::()::test_login_logout">test_login_logout</td>
+          <td>1</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_profile_deletion_confirmation">test_profile_deletion_confirmation</td>
+          <td>1</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/test_account.py::TestAccount::()::test_logout_verify_bid">test_logout_verify_bid</td>
+          <td>1</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_links_in_the_services_page_return_200_code">test_that_links_in_the_services_page_return_200_code</td>
+          <td>1</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+
+    <h2>Slowest tests</h2>
+    <p>Slowest average test durations.</p>
+    
+    <div>
+      <input id="s_amo.stage" type="checkbox" class="toggle" />
+      <label for="s_amo.stage">
+        amo.stage
+        <span class="total" style="background-color: #f00">
+          an hour
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>2 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffde00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_all_add_ons_results_have_pagination_that_moves_through_results">test_that_search_all_add_ons_results_have_pagination_that_moves_through_results</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #fff700">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_downloads">test_sorting_by_downloads</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #fff700">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_most_recently_updated">test_sorting_by_most_recently_updated</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #fffc00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_login_and_logout">test_user_can_login_and_logout</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #fcff00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_update_profile_information_in_account_settings_page">test_user_can_update_profile_information_in_account_settings_page</td>
+          <td>59 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #f7ff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_the_name_of_each_site_navigation_menu_in_the_header">test_the_name_of_each_site_navigation_menu_in_the_header</td>
+          <td>59 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #e3ff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>56 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_amo.dev" type="checkbox" class="toggle" />
+      <label for="s_amo.dev">
+        amo.dev
+        <span class="total" style="background-color: #f00">
+          an hour
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ff7600">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffb900">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffde00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_all_add_ons_results_have_pagination_that_moves_through_results">test_that_search_all_add_ons_results_have_pagination_that_moves_through_results</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffde00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_login_and_logout">test_user_can_login_and_logout</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffe300">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_downloads">test_sorting_by_downloads</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffed00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_update_profile_information_in_account_settings_page">test_user_can_update_profile_information_in_account_settings_page</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #fff200">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_most_recently_updated">test_sorting_by_most_recently_updated</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #fffc00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_the_name_of_each_site_navigation_menu_in_the_header">test_the_name_of_each_site_navigation_menu_in_the_header</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #e8ff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>57 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_amo.prod" type="checkbox" class="toggle" />
+      <label for="s_amo.prod">
+        amo.prod
+        <span class="total" style="background-color: #f00">
+          47 minutes
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>2 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #ffe800">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_all_add_ons_results_have_pagination_that_moves_through_results">test_that_search_all_add_ons_results_have_pagination_that_moves_through_results</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #fffc00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_downloads">test_sorting_by_downloads</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #f7ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_most_recently_updated">test_sorting_by_most_recently_updated</td>
+          <td>59 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #edff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_the_name_of_each_site_navigation_menu_in_the_header">test_the_name_of_each_site_navigation_menu_in_the_header</td>
+          <td>57 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #c9ff00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_image_viewer_navigation">test_image_viewer_navigation</td>
+          <td>53 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #4dff00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_navigating_to_author_addons">test_navigating_to_author_addons</td>
+          <td>39 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_number_of_most_users">test_sorting_by_number_of_most_users</td>
+          <td>38 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_that_checks_if_the_extensions_are_sorted_by_recently_updated">test_that_checks_if_the_extensions_are_sorted_by_recently_updated</td>
+          <td>38 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_newest">test_sorting_by_newest</td>
+          <td>38 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_mozillians.dev" type="checkbox" class="toggle" />
+      <label for="s_mozillians.dev">
+        mozillians.dev
+        <span class="total" style="background-color: #f00">
+          39 minutes
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_modify_external_accounts_irc_nickname">test_that_user_can_modify_external_accounts_irc_nickname</td>
+          <td>3 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_deletion">test_skill_deletion</td>
+          <td>3 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_non_us_user_can_set_get_involved_date">test_that_non_us_user_can_set_get_involved_date</td>
+          <td>2 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_group.py::TestGroup::()::test_group_description_edit">test_group_description_edit</td>
+          <td>2 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_edit_profile_information">test_edit_profile_information</td>
+          <td>2 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_addition">test_skill_addition</td>
+          <td>2 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearch::()::test_that_search_returns_results_for_irc_nickname">test_that_search_returns_results_for_irc_nickname</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_account.py::TestAccount::()::test_logout_verify_bid">test_logout_verify_bid</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ff6200">
+          <td title="tests/test_profile.py::TestProfile::()::test_private_groups_field_when_not_logged_in">test_private_groups_field_when_not_logged_in</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffed00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_create_and_delete_group">test_that_user_can_create_and_delete_group</td>
+          <td>a minute</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_mozillians.stage" type="checkbox" class="toggle" />
+      <label for="s_mozillians.stage">
+        mozillians.stage
+        <span class="total" style="background-color: #f00">
+          32 minutes
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_modify_external_accounts_irc_nickname">test_that_user_can_modify_external_accounts_irc_nickname</td>
+          <td>3 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_non_us_user_can_set_get_involved_date">test_that_non_us_user_can_set_get_involved_date</td>
+          <td>2 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_edit_profile_information">test_edit_profile_information</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_group.py::TestGroup::()::test_group_description_edit">test_group_description_edit</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_addition">test_skill_addition</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_account.py::TestAccount::()::test_logout_verify_bid">test_logout_verify_bid</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ff7100">
+          <td title="tests/test_profile.py::TestProfile::()::test_private_groups_field_when_not_logged_in">test_private_groups_field_when_not_logged_in</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ff7c00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_deletion">test_skill_deletion</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffed00">
+          <td title="tests/test_profile.py::TestProfile::()::test_new_user_cannot_see_groups_or_functional_areas">test_new_user_cannot_see_groups_or_functional_areas</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #b4ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_create_and_delete_group">test_that_user_can_create_and_delete_group</td>
+          <td>51 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_treeherder.stage" type="checkbox" class="toggle" />
+      <label for="s_treeherder.stage">
+        treeherder.stage
+        <span class="total" style="background-color: #ffb400">
+          22 minutes
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_status_results.py::test_status_results_success">test_status_results_success</td>
+          <td>4 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #d3ff00">
+          <td title="tests/test_get_next_results.py::test_get_next_results">test_get_next_results</td>
+          <td>54 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #b4ff00">
+          <td title="tests/test_load_page_results.py::test_load_next_results">test_load_next_results</td>
+          <td>51 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #afff00">
+          <td title="tests/test_filter_job_by_email.py::test_remove_email_address_filter">test_remove_email_address_filter</td>
+          <td>50 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #a5ff00">
+          <td title="tests/test_filter_panel.py::test_filter_by_test_status">test_filter_by_test_status</td>
+          <td>49 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #76ff00">
+          <td title="tests/test_status_results.py::test_status_results_coalesced">test_status_results_coalesced</td>
+          <td>44 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/test_filter_job_by_keywords.py::test_filter_by_job_keyword">test_filter_by_job_keyword</td>
+          <td>42 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #4dff00">
+          <td title="tests/test_filter_panel.py::test_filter_panel_reset_button">test_filter_panel_reset_button</td>
+          <td>39 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_treeherder_menu.py::test_treeherder_dropdown">test_treeherder_dropdown</td>
+          <td>38 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_filter_job_by_email.py::test_filter_by_email">test_filter_by_email</td>
+          <td>38 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_socorro.stage" type="checkbox" class="toggle" />
+      <label for="s_socorro.stage">
+        socorro.stage
+        <span class="total" style="background-color: #4dff00">
+          13 minutes
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ff7c00">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_change_column">test_search_change_column</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #b4ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_lowest_version_topcrashers_do_not_return_errors">test_that_lowest_version_topcrashers_do_not_return_errors</td>
+          <td>51 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_plugin_reports_have_plugin_icon">test_that_only_plugin_reports_have_plugin_icon</td>
+          <td>42 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #39ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_browser_reports_have_browser_icon">test_that_only_browser_reports_have_browser_icon</td>
+          <td>36 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[Firefox]">test_that_top_crashers_reports_links_work</td>
+          <td>33 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_search.py::TestSearchForSpecificResults::()::test_selecting_one_version_doesnt_show_other_versions">test_selecting_one_version_doesnt_show_other_versions</td>
+          <td>33 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #1aff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[Thunderbird]">test_that_top_crashers_reports_links_work</td>
+          <td>33 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/test_api.py::TestAPI::()::test_public_api_navigation">test_public_api_navigation</td>
+          <td>31 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[FennecAndroid]">test_that_top_crashers_reports_links_work</td>
+          <td>28 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_top_crasher_reports_tab_has_uuid_report">test_top_crasher_reports_tab_has_uuid_report</td>
+          <td>28 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_socorro.prod" type="checkbox" class="toggle" />
+      <label for="s_socorro.prod">
+        socorro.prod
+        <span class="total" style="background-color: #43ff00">
+          12 minutes
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ff7c00">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_change_column">test_search_change_column</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #af0">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_lowest_version_topcrashers_do_not_return_errors">test_that_lowest_version_topcrashers_do_not_return_errors</td>
+          <td>50 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #71ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_plugin_reports_have_plugin_icon">test_that_only_plugin_reports_have_plugin_icon</td>
+          <td>43 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #43ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_browser_reports_have_browser_icon">test_that_only_browser_reports_have_browser_icon</td>
+          <td>38 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[Firefox]">test_that_top_crashers_reports_links_work</td>
+          <td>32 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/test_search.py::TestSearchForSpecificResults::()::test_selecting_one_version_doesnt_show_other_versions">test_selecting_one_version_doesnt_show_other_versions</td>
+          <td>32 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #15ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[Thunderbird]">test_that_top_crashers_reports_links_work</td>
+          <td>32 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #0aff00">
+          <td title="tests/test_api.py::TestAPI::()::test_public_api_navigation">test_public_api_navigation</td>
+          <td>31 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #05ff00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[FennecAndroid]">test_that_top_crashers_reports_links_work</td>
+          <td>31 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_top_crasher_reports_tab_has_uuid_report">test_top_crasher_reports_tab_has_uuid_report</td>
+          <td>27 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_mozillians.prod" type="checkbox" class="toggle" />
+      <label for="s_mozillians.prod">
+        mozillians.prod
+        <span class="total" style="background-color: #1fff00">
+          11 minutes
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_account.py::TestAccount::()::test_logout_verify_bid">test_logout_verify_bid</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #ffed00">
+          <td title="tests/test_profile.py::TestProfile::()::test_new_user_cannot_see_groups_or_functional_areas">test_new_user_cannot_see_groups_or_functional_areas</td>
+          <td>a minute</td>
+        </tr>
+        
+        <tr style="background-color: #4dff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_profile_deletion_confirmation">test_profile_deletion_confirmation</td>
+          <td>39 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #2eff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_links_in_the_services_page_return_200_code">test_that_links_in_the_services_page_return_200_code</td>
+          <td>35 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #2eff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_country_works">test_that_filter_by_country_works</td>
+          <td>35 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #2eff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_city_works">test_that_filter_by_city_works</td>
+          <td>35 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #29ff00">
+          <td title="tests/test_search.py::TestSearch::()::test_search_for_not_existing_mozillian_when_logged_in">test_search_for_not_existing_mozillian_when_logged_in</td>
+          <td>34 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_filter_by_region_works">test_that_filter_by_region_works</td>
+          <td>34 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #1fff00">
+          <td title="tests/test_account.py::TestAccount::()::test_login_logout">test_login_logout</td>
+          <td>34 seconds</td>
+        </tr>
+        
+        <tr style="background-color: #1aff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_view_external_accounts">test_that_user_can_view_external_accounts</td>
+          <td>33 seconds</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="s_go-bouncer.prod" type="checkbox" class="toggle" />
+      <label for="s_go-bouncer.prod">
+        go-bouncer.prod
+        <span class="total" style="background-color: #0f0">
+          a minute
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[win]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[osx]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[linux]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale0-win64]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale0-linux]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale0-win]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_releng_aliases_match_what_we_expect">test_verify_releng_aliases_match_what_we_expect</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale1-osx]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale1-win]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>a moment</td>
+        </tr>
+        
+        <tr style="background-color: #0f0">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale1-linux]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>a moment</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+
+    <h2>Longest running tests</h2>
+    <p>Most machine time consumed by tests over multiple executions.</p>
+    
+    <div>
+      <input id="lr_socorro.stage" type="checkbox" class="toggle" />
+      <label for="lr_socorro.stage">
+        socorro.stage
+        <span class="total" style="background-color: #f00">
+          5 days
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_change_column">test_search_change_column</td>
+          <td>12 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_lowest_version_topcrashers_do_not_return_errors">test_that_lowest_version_topcrashers_do_not_return_errors</td>
+          <td>9 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_plugin_reports_have_plugin_icon">test_that_only_plugin_reports_have_plugin_icon</td>
+          <td>7 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_only_browser_reports_have_browser_icon">test_that_only_browser_reports_have_browser_icon</td>
+          <td>6 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[Thunderbird]">test_that_top_crashers_reports_links_work</td>
+          <td>6 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[Firefox]">test_that_top_crashers_reports_links_work</td>
+          <td>5 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSearchForSpecificResults::()::test_selecting_one_version_doesnt_show_other_versions">test_selecting_one_version_doesnt_show_other_versions</td>
+          <td>5 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_top_crasher_reports_tab_has_uuid_report">test_top_crasher_reports_tab_has_uuid_report</td>
+          <td>5 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_search.py::TestSuperSearch::()::test_search_with_multiple_lines">test_search_with_multiple_lines</td>
+          <td>4 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_crash_reports.py::TestCrashReports::()::test_that_top_crashers_reports_links_work[FennecAndroid]">test_that_top_crashers_reports_links_work</td>
+          <td>4 hours</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_go-bouncer.prod" type="checkbox" class="toggle" />
+      <label for="lr_go-bouncer.prod">
+        go-bouncer.prod
+        <span class="total" style="background-color: #f00">
+          4 days
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_releng_aliases_match_what_we_expect">test_verify_releng_aliases_match_what_we_expect</td>
+          <td>37 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[osx]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>36 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #62ff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[win]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>34 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #5dff00">
+          <td title="tests/test_smoketests.py::TestSmokeTests::()::test_verify_firefox_aliases_redirect_to_correct_products[linux]">test_verify_firefox_aliases_redirect_to_correct_products</td>
+          <td>32 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale0-win64]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>26 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale0-linux]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>25 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #48ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale0-win]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>25 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #43ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_verify_locales_redirect_to_the_expected_product[locale1-osx]">test_verify_locales_redirect_to_the_expected_product</td>
+          <td>24 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #43ff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_1_redirects_to_correct_version[esr-latest]">test_ie6_winxp_useragent_5_1_redirects_to_correct_version</td>
+          <td>23 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #3eff00">
+          <td title="tests/test_redirects.py::TestRedirects::()::test_ie6_winxp_useragent_5_1_redirects_to_correct_version[beta-stub]">test_ie6_winxp_useragent_5_1_redirects_to_correct_version</td>
+          <td>23 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_amo.dev" type="checkbox" class="toggle" />
+      <label for="lr_amo.dev">
+        amo.dev
+        <span class="total" style="background-color: #ff6700">
+          2 days
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #deff00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #d3ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #b9ff00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #afff00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_login_and_logout">test_user_can_login_and_logout</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #a5ff00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_update_profile_information_in_account_settings_page">test_user_can_update_profile_information_in_account_settings_page</td>
+          <td>59 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #a0ff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_the_name_of_each_site_navigation_menu_in_the_header">test_the_name_of_each_site_navigation_menu_in_the_header</td>
+          <td>57 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #9bff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>55 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_image_viewer_navigation">test_image_viewer_navigation</td>
+          <td>53 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_downloads">test_sorting_by_downloads</td>
+          <td>52 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #90ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_most_recently_updated">test_sorting_by_most_recently_updated</td>
+          <td>51 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_amo.stage" type="checkbox" class="toggle" />
+      <label for="lr_amo.stage">
+        amo.stage
+        <span class="total" style="background-color: #ff7600">
+          2 days
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ffd800">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_make_a_contribution_without_logging_into_amo">test_that_user_can_make_a_contribution_without_logging_into_amo</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #fff200">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #e8ff00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_user_can_contribute_to_an_addon">test_that_user_can_contribute_to_an_addon</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #a5ff00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_login_and_logout">test_user_can_login_and_logout</td>
+          <td>57 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #a0ff00">
+          <td title="tests/desktop/test_users_account.py::TestAccounts::()::test_user_can_update_profile_information_in_account_settings_page">test_user_can_update_profile_information_in_account_settings_page</td>
+          <td>56 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #9bff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_the_name_of_each_site_navigation_menu_in_the_header">test_the_name_of_each_site_navigation_menu_in_the_header</td>
+          <td>55 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_web_extension_submission">test_web_extension_submission</td>
+          <td>53 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_most_recently_updated">test_sorting_by_most_recently_updated</td>
+          <td>52 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_all_add_ons_results_have_pagination_that_moves_through_results">test_that_search_all_add_ons_results_have_pagination_that_moves_through_results</td>
+          <td>52 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_downloads">test_sorting_by_downloads</td>
+          <td>52 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_amo.prod" type="checkbox" class="toggle" />
+      <label for="lr_amo.prod">
+        amo.prod
+        <span class="total" style="background-color: #ffb900">
+          a day
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #fcff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_results_return_20_results_per_page">test_that_search_results_return_20_results_per_page</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #a0ff00">
+          <td title="tests/desktop/test_homepage.py::TestHome::()::test_the_name_of_each_site_navigation_menu_in_the_header">test_the_name_of_each_site_navigation_menu_in_the_header</td>
+          <td>56 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #9bff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_downloads">test_sorting_by_downloads</td>
+          <td>54 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_sorting_by_most_recently_updated">test_sorting_by_most_recently_updated</td>
+          <td>53 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_search.py::TestSearch::()::test_that_search_all_add_ons_results_have_pagination_that_moves_through_results">test_that_search_all_add_ons_results_have_pagination_that_moves_through_results</td>
+          <td>53 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_image_viewer_navigation">test_image_viewer_navigation</td>
+          <td>53 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #76ff00">
+          <td title="tests/desktop/test_details_page.py::TestDetails::()::test_navigating_to_author_addons">test_navigating_to_author_addons</td>
+          <td>42 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #6cff00">
+          <td title="tests/desktop/test_paypal.py::TestPaypal::()::test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out">test_that_make_contribution_button_is_clickable_and_loads_paypal_frame_while_user_is_logged_out</td>
+          <td>38 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #6cff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_that_checks_if_the_extensions_are_sorted_by_recently_updated">test_that_checks_if_the_extensions_are_sorted_by_recently_updated</td>
+          <td>37 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #67ff00">
+          <td title="tests/desktop/test_extensions.py::TestExtensions::()::test_that_checks_if_the_extensions_are_sorted_by_newest">test_that_checks_if_the_extensions_are_sorted_by_newest</td>
+          <td>37 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_stubattribution.stage" type="checkbox" class="toggle" />
+      <label for="lr_stubattribution.stage">
+        stubattribution.stage
+        <span class="total" style="background-color: #c9ff00">
+          a day
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_stub_attribution_organic.py::test_organic_flow_param_values">test_organic_flow_param_values</td>
+          <td>10 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_stub_attribution_search.py::test_search_flow_param_values[google-paidsearch-Brand-US-GGL-Exact-download%20firefox]">test_search_flow_param_values</td>
+          <td>9 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f00">
+          <td title="tests/test_stub_attribution_campaign.py::test_campaign_flow_param_values[google-paidsearch-Fake%20campaign-test term]">test_campaign_flow_param_values</td>
+          <td>9 hours</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_mozillians.stage" type="checkbox" class="toggle" />
+      <label for="lr_mozillians.stage">
+        mozillians.stage
+        <span class="total" style="background-color: #af0">
+          a day
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ff8600">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_modify_external_accounts_irc_nickname">test_that_user_can_modify_external_accounts_irc_nickname</td>
+          <td>2 hours</td>
+        </tr>
+        
+        <tr style="background-color: #f2ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_edit_profile_information">test_edit_profile_information</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #edff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_non_us_user_can_set_get_involved_date">test_that_non_us_user_can_set_get_involved_date</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #e8ff00">
+          <td title="tests/test_group.py::TestGroup::()::test_group_description_edit">test_group_description_edit</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #c9ff00">
+          <td title="tests/test_account.py::TestAccount::()::test_logout_verify_bid">test_logout_verify_bid</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #9bff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_deletion">test_skill_deletion</td>
+          <td>54 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #86ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_new_user_cannot_see_groups_or_functional_areas">test_new_user_cannot_see_groups_or_functional_areas</td>
+          <td>48 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #86ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_skill_addition">test_skill_addition</td>
+          <td>47 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #71ff00">
+          <td title="tests/test_group.py::TestGroup::()::test_group_invitations">test_group_invitations</td>
+          <td>41 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #71ff00">
+          <td title="tests/test_profile.py::TestProfile::()::test_that_user_can_create_and_delete_group">test_that_user_can_create_and_delete_group</td>
+          <td>40 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_snippets.stage" type="checkbox" class="toggle" />
+      <label for="lr_snippets.stage">
+        snippets.stage
+        <span class="total" style="background-color: #af0">
+          a day
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_snippet_set_present[/3/Firefox/default/default/default/en-US/release/default/default/default/]">test_snippet_set_present</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_snippet_set_present[/3/Firefox/default/default/default/en-US/beta/default/default/default/]">test_snippet_set_present</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_that_snippets_are_well_formed_xml[/3/Firefox/default/default/default/en-US/beta/default/default/default/]">test_that_snippets_are_well_formed_xml</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/release/default/default/default/]">test_all_links</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/aurora/default/default/default/]">test_all_links</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_that_snippets_are_well_formed_xml[/3/Firefox/default/default/default/en-US/release/default/default/default/]">test_that_snippets_are_well_formed_xml</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_snippet_set_present[/3/Firefox/default/default/default/en-US/aurora/default/default/default/]">test_snippet_set_present</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffc900">
+          <td title="test_snippets.py::TestSnippets::()::test_that_snippets_are_well_formed_xml[/3/Firefox/default/default/default/en-US/aurora/default/default/default/]">test_that_snippets_are_well_formed_xml</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #ffce00">
+          <td title="test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/beta/default/default/default/]">test_all_links</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #95ff00">
+          <td title="tests/test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/beta/default/default/default/]">test_all_links</td>
+          <td>52 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_snippets.prod" type="checkbox" class="toggle" />
+      <label for="lr_snippets.prod">
+        snippets.prod
+        <span class="total" style="background-color: #76ff00">
+          16 hours
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #fcff00">
+          <td title="test_snippets.py::TestSnippets::()::test_snippet_set_present[/3/Firefox/default/default/default/en-US/aurora/default/default/default/]">test_snippet_set_present</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #fcff00">
+          <td title="test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/aurora/default/default/default/]">test_all_links</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #f7ff00">
+          <td title="test_snippets.py::TestSnippets::()::test_that_snippets_are_well_formed_xml[/3/Firefox/default/default/default/en-US/aurora/default/default/default/]">test_that_snippets_are_well_formed_xml</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #deff00">
+          <td title="test_snippets.py::TestSnippets::()::test_snippet_set_present[/3/Firefox/default/default/default/en-US/release/default/default/default/]">test_snippet_set_present</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #d8ff00">
+          <td title="test_snippets.py::TestSnippets::()::test_that_snippets_are_well_formed_xml[/3/Firefox/default/default/default/en-US/release/default/default/default/]">test_that_snippets_are_well_formed_xml</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #d8ff00">
+          <td title="test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/release/default/default/default/]">test_all_links</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #c4ff00">
+          <td title="test_snippets.py::TestSnippets::()::test_snippet_set_present[/3/Firefox/default/default/default/en-US/beta/default/default/default/]">test_snippet_set_present</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #c4ff00">
+          <td title="test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/beta/default/default/default/]">test_all_links</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #c4ff00">
+          <td title="test_snippets.py::TestSnippets::()::test_that_snippets_are_well_formed_xml[/3/Firefox/default/default/default/en-US/beta/default/default/default/]">test_that_snippets_are_well_formed_xml</td>
+          <td>an hour</td>
+        </tr>
+        
+        <tr style="background-color: #71ff00">
+          <td title="tests/test_snippets.py::TestSnippets::()::test_all_links[/3/Firefox/default/default/default/en-US/aurora/default/default/default/]">test_all_links</td>
+          <td>40 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <div>
+      <input id="lr_treeherder.stage" type="checkbox" class="toggle" />
+      <label for="lr_treeherder.stage">
+        treeherder.stage
+        <span class="total" style="background-color: #71ff00">
+          16 hours
+        </span>
+      </label>
+      <table>
+        
+        <tr style="background-color: #ff8b00">
+          <td title="tests/test_status_results.py::test_status_results_success">test_status_results_success</td>
+          <td>2 hours</td>
+        </tr>
+        
+        <tr style="background-color: #76ff00">
+          <td title="tests/test_load_page_results.py::test_load_next_results">test_load_next_results</td>
+          <td>42 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #71ff00">
+          <td title="tests/test_get_next_results.py::test_get_next_results">test_get_next_results</td>
+          <td>41 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #5dff00">
+          <td title="tests/test_status_results.py::test_status_results_coalesced">test_status_results_coalesced</td>
+          <td>32 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #58ff00">
+          <td title="tests/test_treeherder_menu.py::test_treeherder_dropdown">test_treeherder_dropdown</td>
+          <td>31 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #58ff00">
+          <td title="tests/test_filter_job_by_email.py::test_remove_email_address_filter">test_remove_email_address_filter</td>
+          <td>31 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #52ff00">
+          <td title="tests/test_filter_panel.py::test_filter_panel_reset_button">test_filter_panel_reset_button</td>
+          <td>29 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #4dff00">
+          <td title="tests/test_filter_job_by_keywords.py::test_filter_by_job_keyword">test_filter_by_job_keyword</td>
+          <td>28 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #4dff00">
+          <td title="tests/test_keyboard_shortcuts.py::test_close_open_panels">test_close_open_panels</td>
+          <td>27 minutes</td>
+        </tr>
+        
+        <tr style="background-color: #4dff00">
+          <td title="tests/test_keyword.py::test_filter_by_job_keyword">test_filter_by_job_keyword</td>
+          <td>27 minutes</td>
+        </tr>
+        
+      </table>
+    </div>
+    
+
+  </body>
+</html>
