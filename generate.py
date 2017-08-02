@@ -29,11 +29,14 @@ sns.set_style('darkgrid')
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Generate report of Firefox Test Engineering results')
-    parser.add_argument('-o', dest='output', default='report.html',
+    parser.add_argument('-o', dest='output', default='out',
                         help='path to write the report')
     parser.add_argument('--use-cache', action='store_true',
                         help='use cached results if they exist')
     args = parser.parse_args()
+
+    if not os.path.exists(args.output):
+        os.makedirs(args.output)
 
     ad = ActiveData(use_cache=args.use_cache)
     tddf = ad.get_test_durations()
@@ -52,49 +55,48 @@ if __name__ == "__main__":
         'lowest_pass_rate': ad.get_lowest_pass_rate(tddf),
         'most_failing': ad.get_most_failing(tddf),
         'slowest': ad.get_slowest(tddf),
-        'longest': ad.get_longest(tddf)}
+        'longest': ad.get_longest(tddf),
+        'jobs': sorted(list(tddf.job.unique()))}
 
     jddf = ad.get_job_durations()
 
     o = {'T': 'expected', 'F': 'unexpected'}
     odf = ad.get_outcomes()
-    jodf = odf.groupby(by=['job', 'date', 'ok', 'result'])['count'] \
-        .sum().unstack(level=2).unstack()
 
-    jobs = jodf.index.levels[0]
-    fig, axes = plt.subplots(len(jobs) + 1, 3, sharex=True, figsize=(15, 40))
-    plt.subplots_adjust(hspace=0.2, wspace=0.15)
-
+    fig, axes = plt.subplots(1, 3, figsize=(15, 2))
     todf = odf.groupby(by=['date', 'ok', 'result'])['count'] \
         .sum().unstack(level=1).unstack()
-
-    for ok, ax in zip(o.keys(), axes[0]):
+    for ok, ax in zip(o.keys(), axes[:2]):
         a = todf[ok].plot(ax=ax, title='all jobs ({} outcomes)'.format(o[ok]))
         a.legend(loc='upper left', frameon=True).set_title('')
 
-    for job, ax in zip(jobs, axes[1:]):
-        for ok, ax in zip(o.keys(), ax[:2]):
+    tddf = ad.get_total_durations()
+    a = tddf.plot(ax=axes[2], title='all jobs (durations)')
+    a.legend(loc='upper left', frameon=True).set_title('')
+    a.set_xlabel('')
+
+    fig.savefig(
+        os.path.join(args.output, 'total.png'),
+        bbox_inches='tight', pad_inches=0)
+
+    jodf = odf.groupby(by=['job', 'date', 'ok', 'result'])['count'] \
+        .sum().unstack(level=2).unstack()
+    for job in jodf.index.levels[0]:
+        fig, axes = plt.subplots(1, 3, figsize=(15, 2))
+        for ok, ax in zip(o.keys(), axes[:2]):
             t = '{} ({} outcomes)'.format(job, o[ok])
             a = jodf.loc[job][ok].plot(ax=ax, title=t)
             a.legend(loc='upper left', frameon=True).set_title('')
             a.set_ylim(ymin=0)
             a.set_xlabel('')
-
-    tddf = ad.get_total_durations()
-    a = tddf.plot(ax=axes[0][2], title='all jobs (durations)')
-    a.legend(loc='upper left', frameon=True).set_title('')
-    a.set_xlabel('')
-
-    for job, ax in zip(jobs, axes[1:]):
         t = '{} (durations)'.format(job)
-        a = jddf.loc[job].plot(ax=ax[2], title=t)
+        a = jddf.loc[job].plot(ax=axes[2], title=t)
         a.legend(loc='upper left', frameon=True).set_title('')
         a.set_xlabel('')
-
-    fig.savefig(
-        os.path.join(os.path.dirname(args.output), 'overview.png'),
-        bbox_inches='tight', pad_inches=0)
+        fig.savefig(
+            os.path.join(args.output, '{}.png'.format(job)),
+            bbox_inches='tight', pad_inches=0)
 
     html = template.render(template_vars)
-    with open(args.output, 'w') as f:
+    with open(os.path.join(args.output, 'index.html'), 'w') as f:
         f.writelines(html)

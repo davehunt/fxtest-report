@@ -89,7 +89,11 @@
     <p>A total of <strong>{{ total }}</strong> tests ran between
       <strong>{{ start }}</strong> and <strong>{{ end }}</strong>.</p>
 
-    <img src="overview.png" />
+    <img src="total.png" />
+
+    {% for j in jobs %}
+    <img src="{{ j }}.png" />
+    {% endfor %}
 
     <h2>Tests with lowest pass rate</h2>
     <p>Percentage of tests that had the expected outcome.</p>
