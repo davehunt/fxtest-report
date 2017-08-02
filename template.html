@@ -36,6 +36,11 @@
         background-color: #ddd;
       }
 
+      .figure {
+        clear: both;
+        padding: 10px 0;
+      }
+
       .wrapper {
         display: grid;
         grid-template-columns: 50% 50%;
@@ -89,10 +94,10 @@
     <p>A total of <strong>{{ total }}</strong> tests ran between
       <strong>{{ start }}</strong> and <strong>{{ end }}</strong>.</p>
 
-    <img src="total.png" />
+    <img class="figure" src="total.png" />
 
     {% for j in jobs %}
-    <img src="{{ j }}.png" />
+    <img class="figure" src="{{ j }}.png" />
     {% endfor %}
 
     <h2>Tests with lowest pass rate</h2>

@@ -9,8 +9,10 @@ from active_data import ActiveData
 import matplotlib
 matplotlib.use('Agg')  # force matplotlib to not use any xwindows backend
 
+import matplotlib.dates as dates
 import matplotlib.pyplot as plt
 import matplotlib.pylab as pylab
+import matplotlib.ticker as ticker
 import seaborn as sns
 
 params = {
@@ -24,6 +26,14 @@ params = {
     'legend.facecolor': 'white'}
 pylab.rcParams.update(params)
 sns.set_style('darkgrid')
+
+
+def format_axis(axis):
+    axis.legend(loc='upper left', frameon=True).set_title('')
+    axis.xaxis.set_major_locator(dates.DayLocator(interval=7))
+    axis.xaxis.set_major_formatter(dates.DateFormatter('%d\n%b'))
+    axis.xaxis.set_minor_formatter(ticker.NullFormatter())
+    axis.set_xlabel('')
 
 
 if __name__ == "__main__":
@@ -68,12 +78,11 @@ if __name__ == "__main__":
         .sum().unstack(level=1).unstack()
     for ok, ax in zip(o.keys(), axes[:2]):
         a = todf[ok].plot(ax=ax, title='all jobs ({} outcomes)'.format(o[ok]))
-        a.legend(loc='upper left', frameon=True).set_title('')
+        format_axis(a)
 
     tddf = ad.get_total_durations()
     a = tddf.plot(ax=axes[2], title='all jobs (durations)')
-    a.legend(loc='upper left', frameon=True).set_title('')
-    a.set_xlabel('')
+    format_axis(a)
 
     fig.savefig(
         os.path.join(args.output, 'total.png'),
@@ -86,13 +95,10 @@ if __name__ == "__main__":
         for ok, ax in zip(o.keys(), axes[:2]):
             t = '{} ({} outcomes)'.format(job, o[ok])
             a = jodf.loc[job][ok].plot(ax=ax, title=t)
-            a.legend(loc='upper left', frameon=True).set_title('')
-            a.set_ylim(ymin=0)
-            a.set_xlabel('')
+            format_axis(a)
         t = '{} (durations)'.format(job)
         a = jddf.loc[job].plot(ax=axes[2], title=t)
-        a.legend(loc='upper left', frameon=True).set_title('')
-        a.set_xlabel('')
+        format_axis(a)
         fig.savefig(
             os.path.join(args.output, '{}.png'.format(job)),
             bbox_inches='tight', pad_inches=0)
