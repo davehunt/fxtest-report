@@ -51,12 +51,19 @@ class ActiveData(object):
         df.set_index('date', inplace=True)
         return df
 
-    def get_job_durations(self):
-        df = self._get_data('job_durations')
+    def get_jobs(self):
+        df = self._get_data('jobs')
         df['date'] = pd.to_datetime(df['date'], unit='s')
         df.sort_values(by=['job', 'date'], inplace=True)
         df.set_index(['job', 'date'], inplace=True)
         return df
+
+    def get_failures_by_job(self):
+        df = self._get_data('failures_by_job')
+        df.distinct.fillna(0, inplace=True)
+        df['date'] = pd.to_datetime(df['date'], unit='s')
+        return df.groupby(by=['job', 'date', 'result'])['distinct'] \
+            .sum().unstack(level=2)
 
     def get_test_durations(self):
         df = self._get_data('test_durations')

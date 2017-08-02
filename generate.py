@@ -50,10 +50,9 @@ if __name__ == "__main__":
 
     ad = ActiveData(use_cache=args.use_cache)
     summary = ad.get_summary()
+    jobs = ad.get_jobs()
     tddf = ad.get_test_durations()
     generated = datetime.now()
-    start = datetime.fromtimestamp(tddf['start'].min())
-    end = datetime.fromtimestamp(tddf['end'].max())
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.html')
     template_vars = {
@@ -69,9 +68,7 @@ if __name__ == "__main__":
         'most_failing': ad.get_most_failing(tddf),
         'slowest': ad.get_slowest(tddf),
         'longest': ad.get_longest(tddf),
-        'jobs': sorted(list(tddf.job.unique()))}
-
-    jddf = ad.get_job_durations()
+        'jobs': list(jobs.index.levels[0])}
 
     o = {'T': 'expected', 'F': 'unexpected'}
     odf = ad.get_outcomes()
@@ -91,17 +88,22 @@ if __name__ == "__main__":
         os.path.join(args.output, 'total.png'),
         bbox_inches='tight', pad_inches=0)
 
-    jodf = odf.groupby(by=['job', 'date', 'ok', 'result'])['count'] \
-        .sum().unstack(level=2).unstack()
-    for job in jodf.index.levels[0]:
+    failures_by_job = ad.get_failures_by_job()
+
+    for job in jobs.index.levels[0]:
         fig, axes = plt.subplots(1, 3, figsize=(15, 2))
-        for ok, ax in zip(o.keys(), axes[:2]):
-            t = '{} ({} outcomes)'.format(job, o[ok])
-            a = jodf.loc[job][ok].plot(ax=ax, title=t)
-            format_axis(a)
-        t = '{} (durations)'.format(job)
-        a = jddf.loc[job].plot(ax=axes[2], title=t)
+        t = '{} (tests)'.format(job)
+        a = jobs.distinct.loc[job].plot(ax=axes[0], title=t)
         format_axis(a)
+        t = '{} (durations)'.format(job)
+        a = jobs.elapsed.loc[job].plot(ax=axes[1], title=t)
+        format_axis(a)
+        try:
+            t = '{} (failures)'.format(job)
+            a = failures_by_job.loc[job].plot(ax=axes[2], title=t)
+            format_axis(a)
+        except KeyError:
+            pass
         fig.savefig(
             os.path.join(args.output, '{}.png'.format(job)),
             bbox_inches='tight', pad_inches=0)
