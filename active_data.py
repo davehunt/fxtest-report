@@ -38,6 +38,12 @@ class ActiveData(object):
                 df.to_pickle(cache_path)
         return df
 
+    def get_summary(self):
+        df = self._get_data('summary')
+        df['start'] = pd.to_datetime(df['start'], unit='s')
+        df['end'] = pd.to_datetime(df['end'], unit='s')
+        return df
+
     def get_total_durations(self):
         df = self._get_data('total_durations')
         df['date'] = pd.to_datetime(df['date'], unit='s')

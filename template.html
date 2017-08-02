@@ -91,8 +91,10 @@
     <h1>Firefox Test Engineering Test Results</h1>
     <p>Generated on <strong>{{ generated.date }}</strong> at
       <strong>{{ generated.time }}</strong>.</p>
-    <p>A total of <strong>{{ total }}</strong> tests ran between
-      <strong>{{ start }}</strong> and <strong>{{ end }}</strong>.</p>
+    <p>A total of <strong>{{ summary.distinct }}</strong> tests ran
+      <strong>{{ summary.total }}</strong> times between
+      <strong>{{ summary.start }}</strong> and
+      <strong>{{ summary.end }}</strong>.</p>
 
     <img class="figure" src="total.png" />
 

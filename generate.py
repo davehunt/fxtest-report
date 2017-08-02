@@ -49,6 +49,7 @@ if __name__ == "__main__":
         os.makedirs(args.output)
 
     ad = ActiveData(use_cache=args.use_cache)
+    summary = ad.get_summary()
     tddf = ad.get_test_durations()
     generated = datetime.now()
     start = datetime.fromtimestamp(tddf['start'].min())
@@ -56,12 +57,14 @@ if __name__ == "__main__":
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.html')
     template_vars = {
-        'total': '{:,}'.format(tddf['count'].sum()),
-        'start':  start.strftime('%d-%b-%Y'),
-        'end': end.strftime('%d-%b-%Y'),
         'generated': {
             'date': generated.strftime('%d-%b-%Y'),
             'time': generated.strftime('%H:%M:%S')},
+        'summary': {
+            'distinct': '{:,}'.format(summary.distinct[0]),
+            'total': '{:,}'.format(summary.total[0]),
+            'start': summary.start[0].strftime('%d-%b-%Y'),
+            'end': summary.end[0].strftime('%d-%b-%Y')},
         'lowest_pass_rate': ad.get_lowest_pass_rate(tddf),
         'most_failing': ad.get_most_failing(tddf),
         'slowest': ad.get_slowest(tddf),
