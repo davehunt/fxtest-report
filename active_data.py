@@ -33,9 +33,8 @@ class ActiveData(object):
         with open(os.path.join('queries', query + '.json'), 'r') as f:
             r = requests.post(self.url, data=f.read()).json()
             df = pd.DataFrame(r['data'], columns=r['header'])
-        if self.use_cache:
-            with open(cache_path, 'w') as f:
-                df.to_pickle(cache_path)
+        with open(cache_path, 'w') as f:
+            df.to_pickle(cache_path)
         return df
 
     def get_durations(self):
