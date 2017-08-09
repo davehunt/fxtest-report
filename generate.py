@@ -45,10 +45,12 @@ if __name__ == "__main__":
                         help='use cached results if they exist')
     args = parser.parse_args()
 
-    if not os.path.exists(args.output):
-        os.makedirs(args.output)
+    schema = 'fx-test'
 
-    ad = ActiveData(use_cache=args.use_cache)
+    if not os.path.exists(os.path.join(args.output, schema)):
+        os.makedirs(os.path.join(args.output, schema))
+
+    ad = ActiveData(schema, use_cache=args.use_cache)
 
     summary = ad.get_summary()
     durations = ad.get_durations()
@@ -59,8 +61,9 @@ if __name__ == "__main__":
 
     generated = datetime.now()
     env = Environment(loader=FileSystemLoader('.'))
-    template = env.get_template('template.html')
+    template = env.get_template(os.path.join('templates', 'report.html'))
     template_vars = {
+        'schema': schema,
         'generated': {
             'date': generated.strftime('%d-%b-%Y'),
             'time': generated.strftime('%H:%M:%S')},
@@ -81,7 +84,7 @@ if __name__ == "__main__":
     format_axis(failures.plot(ax=axes[2], title='failures'))
 
     fig.savefig(
-        os.path.join(args.output, 'total.png'),
+        os.path.join(args.output, schema, 'total.png'),
         bbox_inches='tight', pad_inches=0)
 
     for job in durations_by_job.index.levels[0]:
@@ -99,9 +102,13 @@ if __name__ == "__main__":
         except KeyError:
             pass
         fig.savefig(
-            os.path.join(args.output, '{}.png'.format(job)),
+            os.path.join(args.output, schema, '{}.png'.format(job)),
             bbox_inches='tight', pad_inches=0)
 
     html = template.render(template_vars)
-    with open(os.path.join(args.output, 'index.html'), 'w') as f:
+    with open(os.path.join(args.output, schema, 'index.html'), 'w') as f:
         f.writelines(html)
+
+    with open(os.path.join(args.output, 'index.html'), 'w') as f:
+        template = env.get_template(os.path.join('templates', 'index.html'))
+        f.writelines(template.render())

@@ -8,9 +8,10 @@ import requests
 
 class ActiveData(object):
 
-    def __init__(self, use_cache=False):
-        self.cache = '.cache'
-        if use_cache and not os.path.exists(self.cache):
+    def __init__(self, schema, use_cache=False):
+        self.schema = schema
+        self.cache = os.path.join('.cache', schema)
+        if not os.path.exists(self.cache):
             os.makedirs(self.cache)
         self.url = 'http://activedata.allizom.org/query'
         self.use_cache = use_cache
@@ -30,7 +31,9 @@ class ActiveData(object):
                 return df
             except FileNotFoundError:
                 print('No cached results found in {}.'.format(cache_path))
-        with open(os.path.join('queries', query + '.json'), 'r') as f:
+        q = os.path.join('queries', query + '.json')
+        with open(q, 'r') as f:
+            print('Performing {}'.format(q))
             r = requests.post(self.url, data=f.read()).json()
             df = pd.DataFrame(r['data'], columns=r['header'])
         with open(cache_path, 'w') as f:
