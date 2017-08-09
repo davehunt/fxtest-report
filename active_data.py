@@ -1,6 +1,7 @@
 import os
 
 from colour import Color
+from jinja2 import Environment, FileSystemLoader
 from humanize import naturaldelta
 import pandas as pd
 import requests
@@ -15,6 +16,7 @@ class ActiveData(object):
             os.makedirs(self.cache)
         self.url = 'http://activedata.allizom.org/query'
         self.use_cache = use_cache
+        self.env = Environment(loader=FileSystemLoader('.'))
 
     def _get_color(self, value, _max, _min=0):
         spectrum = list(Color('lime').range_to(Color('red'), 100))
@@ -31,14 +33,22 @@ class ActiveData(object):
                 return df
             except FileNotFoundError:
                 print('No cached results found in {}.'.format(cache_path))
-        q = os.path.join('queries', query + '.json')
-        with open(q, 'r') as f:
-            print('Performing {}'.format(q))
-            r = requests.post(self.url, data=f.read()).json()
-            df = pd.DataFrame(r['data'], columns=r['header'])
-        with open(cache_path, 'w') as f:
+        r = requests.post(self.url, data=self._get_query(query)).json()
+        df = pd.DataFrame(r['data'], columns=r['header'])
+        with open(cache_path, 'w'):
             df.to_pickle(cache_path)
         return df
+
+    def _get_query(self, name, **kwargs):
+        path = os.path.join('templates', name + '.json')
+        template = self.env.get_template(path)
+        return template.render(
+            schema=self.schema,
+            test_id='test.full_name',
+            test_name='test.name',
+            since='today-8week',
+            limit=1000,
+            **kwargs)
 
     def get_durations(self):
         df = self._get_data('durations')
