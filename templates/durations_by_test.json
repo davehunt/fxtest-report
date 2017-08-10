@@ -1,0 +1,72 @@
+{
+  "from": "{{ schema }}",
+  "groupby": [
+    {
+      "name": "job",
+      "value": "run.job_name"
+    },
+    {
+      "name": "test_id",
+      "value": "{{ test_id }}"
+    },
+    {
+      "name": "test_name",
+      "value": "{{ test_name }}"
+    }
+  ],
+  "select": [
+    {
+      "name": "d90",
+      "aggregate": "percentile",
+      "percentile": 0.9,
+      "value": "result.duration"
+    },
+    {
+      "name": "dtotal",
+      "aggregate": "sum",
+      "value": "result.duration"
+    },
+    {
+      "name": "count",
+      "aggregate": "count"
+    },
+    {
+      "name": "failures",
+      "aggregate": "sum",
+      "value": {
+        "when": {
+          "eq": {
+            "result.ok": "F"
+          }
+        },
+        "then": 1,
+        "else": 0
+      }
+    },
+    {
+      "name": "start",
+      "aggregate": "min",
+      "value": "run.stats.start_time"
+    },
+    {
+      "name": "end",
+      "aggregate": "max",
+      "value": "run.stats.end_time"
+    }
+  ],
+  "where": {
+    "and": [
+			{% for expression in when %}
+				{{ expression|tojson }},
+			{% endfor %}
+			{
+        "gt": {
+          "run.stats.start_time": {
+            "date": "{{ since }}"
+          }
+        }
+      }
+    ]
+  },
+  "limit": {{ limit }}
+}

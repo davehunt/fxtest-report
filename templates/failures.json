@@ -1,0 +1,46 @@
+{
+	"from": "{{ schema }}",
+	"edges": [{
+			"allowNulls": false,
+			"domain": {
+				"max": "today-1day",
+				"interval": "day",
+				"type": "time",
+				"min": "{{ since }}"
+			},
+			"name": "date",
+			"value": "result.end_time"
+		},
+		{
+			"allowNulls": false,
+			"name": "result",
+			"value": "result.result"
+		}
+	],
+	"select": [{
+		"aggregate": "cardinality",
+		"name": "distinct",
+		"value": "{{ test_id }}"
+	}],
+	"where": {
+		"and": [
+			{% for expression in when %}
+				{{ expression|tojson }},
+			{% endfor %}
+			{
+				"eq": {
+					"result.ok": "F"
+				}
+			},
+			{
+				"gt": {
+					"run.stats.start_time": {
+						"date": "{{ since }}"
+					}
+				}
+			}
+		]
+	},
+	"format": "table",
+	"limit": {{ limit }}
+}

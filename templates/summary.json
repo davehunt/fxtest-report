@@ -1,0 +1,39 @@
+{
+	"from": "{{ schema }}",
+	"select": [{
+			"aggregate": "min",
+			"name": "start",
+			"value": "run.stats.start_time"
+		},
+		{
+			"aggregate": "max",
+			"name": "end",
+			"value": "run.stats.end_time"
+		},
+		{
+			"aggregate": "cardinality",
+			"name": "distinct",
+			"value": "{{ test_id }}"
+		},
+		{
+			"aggregate": "count",
+			"name": "total"
+		}
+	],
+	"where": {
+		"and": [
+			{% for expression in when %}
+				{{ expression|tojson }},
+			{% endfor %}
+			{
+				"gt": {
+					"run.stats.start_time": {
+						"date": "{{ since }}"
+					}
+				}
+			}
+		]
+	},
+	"format": "table",
+	"limit": {{ limit }}
+}
