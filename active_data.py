@@ -6,6 +6,14 @@ from humanize import naturaldelta
 import pandas as pd
 import requests
 
+TEMPLATE_VARS = {
+    'fx-test': {
+        'test_id': 'test.full_name',
+        'test_name': 'test.name',
+        'when': [
+            {'eq': {'run.jenkins_url':
+                    'https://fx-test-jenkins.stage.mozaws.net/'}}]}}
+
 
 class ActiveData(object):
 
@@ -39,16 +47,17 @@ class ActiveData(object):
             df.to_pickle(cache_path)
         return df
 
-    def _get_query(self, name, **kwargs):
+    def _get_query(self, name):
         path = os.path.join('templates', name + '.json')
         template = self.env.get_template(path)
-        return template.render(
-            schema=self.schema,
-            test_id='test.full_name',
-            test_name='test.name',
-            since='today-8week',
-            limit=1000,
-            **kwargs)
+        variables = {
+            'schema': self.schema,
+            'since': 'today-8week',
+            'limit': 1000}
+        variables.update(TEMPLATE_VARS[self.schema])
+        print('Building {} query with {}'.format(name, variables))
+        query = template.render(**variables)
+        return query
 
     def get_durations(self):
         df = self._get_data('durations')
