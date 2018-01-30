@@ -1,0 +1,30 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+colour = "*"
+Cycler = "*"
+humanize = "*"
+"Jinja2" = "*"
+MarkupSafe = "*"
+matplotlib = "*"
+numpy = "*"
+pandas = "*"
+pyparsing = "*"
+python-dateutil = "*"
+pytz = "*"
+requests = "*"
+scipy = "*"
+seaborn = "*"
+
+
+[dev-packages]
+
+
+[requires]
+python_version = "3.6"
