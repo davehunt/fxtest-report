@@ -27,15 +27,6 @@
       "value": "result.ok"
     }
   ],
-  "where": {
-    "and": [
-      {
-        "eq": {
-          "run.jenkins_url": "https:\/\/fx-test-jenkins.stage.mozaws.net\/"
-        }
-      }
-    ]
-  },
   "limit": 1000,
   "format": "table"
 }

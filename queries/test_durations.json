@@ -55,20 +55,11 @@
     }
   ],
   "where": {
-    "and": [
-      {
-        "eq": {
-          "run.jenkins_url": "https:\/\/fx-test-jenkins.stage.mozaws.net\/"
-        }
-      },
-      {
-        "gt": {
-          "run.stats.start_time": {
-            "date": "today-8week"
-          }
-        }
+    "gt": {
+      "run.stats.start_time": {
+        "date": "today-8week"
       }
-    ]
+    }
   },
   "limit": 1000
 }
