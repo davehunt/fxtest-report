@@ -22,3 +22,7 @@ seaborn = "==0.8.1"
 
 [requires]
 python_version = "3.6"
+
+
+[scripts]
+generate = "python generate.py -o report.html"
