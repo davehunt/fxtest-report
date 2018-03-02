@@ -1,18 +1,16 @@
 import argparse
-from datetime import datetime
 import os
+from datetime import datetime
 
+import matplotlib  # noqa
+matplotlib.use('Agg')  # noqa force matplotlib to not use any xwindows backend
+import matplotlib.pylab as pylab
+import matplotlib.pyplot as plt
+import seaborn as sns
 from jinja2 import Environment, FileSystemLoader
 
 from active_data import ActiveData
-
-import matplotlib
-matplotlib.use('Agg')  # force matplotlib to not use any xwindows backend
-
-import matplotlib.pyplot as plt
-import matplotlib.pylab as pylab
-import seaborn as sns
-
+# noqa
 params = {
     'legend.fontsize': 'x-small',
     'axes.labelsize': 'x-small',

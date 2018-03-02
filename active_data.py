@@ -1,9 +1,9 @@
 import os
 
-from colour import Color
-from humanize import naturaldelta
 import pandas as pd
 import requests
+from colour import Color
+from humanize import naturaldelta
 
 
 class ActiveData(object):
