@@ -7,20 +7,14 @@ name = "pypi"
 
 [packages]
 
-colour = "*"
-Cycler = "*"
-humanize = "*"
-"Jinja2" = "*"
-MarkupSafe = "*"
-matplotlib = "*"
-numpy = "*"
-pandas = "*"
-pyparsing = "*"
-python-dateutil = "*"
-pytz = "*"
-requests = "*"
-scipy = "*"
-seaborn = "*"
+colour = "==0.1.5"
+humanize = "==0.5.1"
+"Jinja2" = "==2.10"
+matplotlib = "==2.1.2"
+numpy = "==1.14.0"
+pandas = "==0.22.0"
+requests = "==2.18.4"
+seaborn = "==0.8.1"
 
 
 [dev-packages]

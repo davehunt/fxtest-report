@@ -1,2 +1,4 @@
-report.html
+__pycache__
 overview.png
+Pipfile.lock
+report.html

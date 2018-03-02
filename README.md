@@ -6,5 +6,6 @@ automated test results submitted to ActiveData. To generate a report, install
 [pipenv](https://docs.pipenv.org/) and then run:
 
 ```
-pipenv run python generate.py report.html
+$ pipenv install
+$ pipenv run python generate.py report.html
 ```
