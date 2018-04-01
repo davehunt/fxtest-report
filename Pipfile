@@ -9,8 +9,8 @@ name = "pypi"
 
 colour = "==0.1.5"
 humanize = "==0.5.1"
-"jinja2" = "==2.10"
-matplotlib = "==2.1.2"
+jinja2 = "==2.10"
+matplotlib = "==2.2.2"
 numpy = "==1.14.0"
 pandas = "==0.22.0"
 requests = "==2.18.4"
@@ -19,8 +19,8 @@ seaborn = "==0.8.1"
 
 [dev-packages]
 
-"flake8" = "==3.5.0"
-"flake8-isort" = "==2.4"
+flake8 = "==3.5.0"
+flake8-isort = "==2.4"
 
 
 [requires]
