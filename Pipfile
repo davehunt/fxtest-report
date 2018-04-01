@@ -20,7 +20,7 @@ seaborn = "==0.8.1"
 [dev-packages]
 
 flake8 = "==3.5.0"
-flake8-isort = "==2.4"
+flake8-isort = "==2.5"
 
 
 [requires]
