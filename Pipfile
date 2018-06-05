@@ -7,20 +7,20 @@ name = "pypi"
 
 [packages]
 
-colour = "==0.1.5"
-humanize = "==0.5.1"
-jinja2 = "==2.10"
-matplotlib = "==2.2.2"
-numpy = "==1.14.3"
-pandas = "==0.23.0"
-requests = "==2.18.4"
-seaborn = "==0.8.1"
+colour = "*"
+humanize = "*"
+jinja2 = "*"
+matplotlib = "*"
+numpy = "*"
+pandas = "*"
+requests = "*"
+seaborn = "*"
 
 
 [dev-packages]
 
-flake8 = "==3.5.0"
-flake8-isort = "==2.5"
+flake8 = "*"
+flake8-isort = "*"
 
 
 [requires]
