@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/davehunt/fxtest-report.svg?branch=master)](https://travis-ci.org/davehunt/fxtest-report)
+
 Firefox Test Engineering Test Results
 =====================================
 
