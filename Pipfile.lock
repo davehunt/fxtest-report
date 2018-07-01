@@ -310,10 +310,10 @@
         },
         "testfixtures": {
             "hashes": [
-                "sha256:04f31490bbebd7b87eae3bc63d1f1056cdcab62c76301b92bf34fc1267ffc367",
-                "sha256:f8827cfc91e5cc9ac669727fdd48a85880f391b935a0a212b5cedb807879feec"
+                "sha256:bcadbad77526cc5fc38bfb2ab80da810d7bde56ffe4c7fdb8e2bba122ded9620",
+                "sha256:7e4df89a8bf8b8905464160f08aff131a36f0b33654fe4f9e4387afe546eae25"
             ],
-            "version": "==6.0.2"
+            "version": "==6.2.0"
         }
     }
 }
