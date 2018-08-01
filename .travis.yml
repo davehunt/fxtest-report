@@ -1,9 +1,7 @@
 language: python
 python: 3.6
-env:
-  - PIPENV_IGNORE_VIRTUALENVS=1
 install:
-  - pip install -r pipenv.txt
+  - pip install -r requirements/pipenv.txt
 script:
   - pipenv check
   - pipenv install --dev
