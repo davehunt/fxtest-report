@@ -2,6 +2,9 @@ pipeline {
   agent {
     dockerfile true
   }
+  options {
+    timeout(time: 1, unit: 'HOURS')
+  }
   stages {
     stage('Generate Report') {
       steps {
