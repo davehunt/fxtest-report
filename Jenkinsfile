@@ -9,7 +9,7 @@ pipeline {
       }
       post {
         always {
-          archiveArtifacts 'index.html'
+          archiveArtifacts ['index.html', 'generate.log']
           publishHTML(target: [
             allowMissing: false,
             alwaysLinkToLastBuild: true,

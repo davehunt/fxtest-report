@@ -1,6 +1,8 @@
 import argparse
 import os
 from datetime import datetime
+import logging
+from logging.config import dictConfig
 
 import matplotlib  # noqa
 matplotlib.use('Agg')  # noqa force matplotlib to not use any xwindows backend
@@ -23,8 +25,40 @@ params = {
 pylab.rcParams.update(params)
 sns.set_style('darkgrid')
 
+logger = logging.getLogger(__name__)
+logging_config = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'default',
+            'level': 'INFO',
+            'stream': 'ext://sys.stdout',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'formatter': 'default',
+            'level': 'DEBUG',
+            'filename': 'generate.log',
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propogate': True,
+        }
+    },
+}
 
-if __name__ == "__main__":
+
+def main():
     parser = argparse.ArgumentParser(
         description='Generate report of Firefox Test Engineering results')
     parser.add_argument('-o', dest='output', default='report.html',
@@ -96,3 +130,8 @@ if __name__ == "__main__":
     html = template.render(template_vars)
     with open(args.output, 'w') as f:
         f.writelines(html)
+
+
+if __name__ == "__main__":
+    dictConfig(logging_config)
+    main()

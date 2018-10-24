@@ -1,9 +1,12 @@
+import logging
 import os
 
 import pandas as pd
 import requests
 from colour import Color
 from humanize import naturaldelta
+
+logger = logging.getLogger(__name__)
 
 
 class ActiveData(object):
@@ -26,13 +29,19 @@ class ActiveData(object):
         if self.use_cache:
             try:
                 df = pd.read_pickle(cache_path)
-                print('Using cached results in {}.'.format(cache_path))
+                logger.info('Using cached results in {}.'.format(cache_path))
                 return df
             except FileNotFoundError:
-                print('No cached results found in {}.'.format(cache_path))
+                logging.warning('No cached results found in {}.'.format(cache_path))
         with open(os.path.join('queries', query + '.json'), 'r') as f:
-            r = requests.post(self.url, data=f.read()).json()
-            df = pd.DataFrame(r['data'], columns=r['header'])
+            data = f.read()
+            logger.debug(f"Query: {data}")
+            r = requests.post(self.url, data=data).json()
+            try:
+                df = pd.DataFrame(r['data'], columns=r['header'])
+            except KeyError:
+                logger.error(f"Response: {r}")
+                raise
         if self.use_cache:
             with open(cache_path, 'w') as f:
                 df.to_pickle(cache_path)
