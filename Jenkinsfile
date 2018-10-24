@@ -2,6 +2,12 @@ pipeline {
   agent {
     dockerfile true
   }
+  libraries {
+    lib('fxtest@1.10')
+  }
+  triggers {
+    cron('H * * * * ')
+  }
   options {
     timeout(time: 1, unit: 'HOURS')
   }
@@ -39,6 +45,18 @@ pipeline {
               useServerSideEncryption: false]],
             pluginFailureResultConstraint: 'SUCCESS',
             profileName: 'fx-test-jenkins-s3-publisher'])
+        }
+        changed {
+          ircNotification()
+        }
+        failure {
+          emailext(
+            attachLog: true,
+            attachmentsPattern: 'index.html, generate.log',
+            body: '$BUILD_URL',
+            replyTo: '$DEFAULT_REPLYTO',
+            subject: '$DEFAULT_SUBJECT',
+            to: '$DEFAULT_RECIPIENTS')
         }
       }
     }
