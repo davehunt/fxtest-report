@@ -90,7 +90,7 @@ def main():
 
     jddf = ad.get_job_durations()
 
-    o = {"T": "expected", "F": "unexpected"}
+    o = {True: "expected", False: "unexpected"}
     odf = ad.get_outcomes()
     jodf = (
         odf.groupby(by=["job", "date", "ok", "result"])["count"]
