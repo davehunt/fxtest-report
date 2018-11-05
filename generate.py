@@ -100,7 +100,7 @@ def main():
     )
 
     jobs = jodf.index.levels[0]
-    fig, axes = plt.subplots(len(jobs) + 1, 3, sharex=True, figsize=(15, 40))
+    fig, axes = plt.subplots(len(jobs) + 1, 3, sharex=True, figsize=(15, 2 * len(jobs)))
     plt.subplots_adjust(hspace=0.2, wspace=0.15)
 
     todf = (
