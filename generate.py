@@ -1,7 +1,7 @@
 import argparse
+import logging
 import os
 from datetime import datetime
-import logging
 from logging.config import dictConfig
 
 import matplotlib  # noqa
